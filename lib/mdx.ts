@@ -12,6 +12,7 @@ export type PostFrontmatter = {
   excerpt?: string;
   cover?: string;
   tags?: string[];
+  draft?: boolean;
 };
 
 export type Post = {
@@ -22,7 +23,8 @@ export type Post = {
 
 const BLOG_DIR = path.join(process.cwd(), 'content', 'blog');
 
-export async function getAllPosts(): Promise<Post[]> {
+export async function getAllPosts(options: { includeDrafts?: boolean } = {}): Promise<Post[]> {
+  const { includeDrafts = process.env.NODE_ENV !== 'production' } = options;
   await fs.mkdir(BLOG_DIR, { recursive: true });
   const files = await fs.readdir(BLOG_DIR);
   const mdxFiles = files.filter((f) => f.endsWith('.md') || f.endsWith('.mdx'));
@@ -38,21 +40,28 @@ export async function getAllPosts(): Promise<Post[]> {
       };
     })
   );
-  return posts.sort((a, b) => (a.frontmatter.date < b.frontmatter.date ? 1 : -1));
+  return posts
+    .filter((p) => (includeDrafts ? true : !p.frontmatter.draft))
+    .sort((a, b) => (a.frontmatter.date < b.frontmatter.date ? 1 : -1));
 }
 
-export async function getPost(slug: string): Promise<Post | null> {
+export async function getPost(slug: string, options: { includeDrafts?: boolean } = {}): Promise<Post | null> {
+  const { includeDrafts = process.env.NODE_ENV !== 'production' } = options;
   const filePath = path.join(BLOG_DIR, `${slug}.mdx`);
   try {
     const raw = await fs.readFile(filePath, 'utf8');
     const { data, content } = matter(raw);
-    return { slug, frontmatter: data as PostFrontmatter, content };
+  const fm = data as PostFrontmatter;
+  if (fm.draft && !includeDrafts) return null;
+  return { slug, frontmatter: fm, content };
   } catch (e) {
     const alt = path.join(BLOG_DIR, `${slug}.md`);
     try {
       const raw = await fs.readFile(alt, 'utf8');
       const { data, content } = matter(raw);
-      return { slug, frontmatter: data as PostFrontmatter, content };
+  const fm = data as PostFrontmatter;
+  if (fm.draft && !includeDrafts) return null;
+  return { slug, frontmatter: fm, content };
     } catch (_) {
       return null;
     }
