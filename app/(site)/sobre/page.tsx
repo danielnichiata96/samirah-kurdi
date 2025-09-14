@@ -6,6 +6,7 @@ import Section from '@/components/Section';
 import Container from '@/components/Container';
 import Prose from '@/components/Prose';
 import Link from 'next/link';
+import { getInstagramHandle, getWhatsappLink, siteConfig } from '@/lib/config';
 
 export const metadata: Metadata = {
   title: 'Sobre Samirah Kurdi — Confeitaria, Aulas e Consultoria',
@@ -48,10 +49,9 @@ function buildInstagram(handle: string) {
 
 export default function SobrePage() {
   const heroSrc = getHeroImage();
-  const whatsappRaw = getEnv('CONTACT_WHATSAPP');
-  const email = getEnv('CONTACT_EMAIL');
-  const ig = buildInstagram(getEnv('SOCIAL_INSTAGRAM'));
-  const whatsappLink = buildWhatsAppLink(whatsappRaw);
+  const whatsappLink = getWhatsappLink();
+  const email = siteConfig.contact.email;
+  const ig = getInstagramHandle();
 
   return (
     <>

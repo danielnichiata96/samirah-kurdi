@@ -2,9 +2,10 @@ import Section from '@/components/Section';
 import Container from '@/components/Container';
 import EbookCard from '@/components/EbookCard';
 import ebooks from '@/content/ebooks.json';
+import { siteConfig } from '@/lib/config';
 
 export default function EbooksPage() {
-  const checkout = process.env.CHECKOUT_EBOOK_URL || '';
+  const checkout = siteConfig.commerce.checkoutEbook;
   return (
     <Section>
       <Container>
