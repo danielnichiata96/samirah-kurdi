@@ -53,8 +53,11 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       <Container>
         <article>
           <header className="mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold leading-tight font-serif">
+            <h1 className="text-3xl md:text-4xl font-bold leading-tight font-serif flex items-center gap-3 flex-wrap">
               {post.frontmatter.title}
+              {process.env.NODE_ENV !== 'production' && post.frontmatter.draft && (
+                <span className="inline-block rounded bg-amber-100 text-amber-700 border border-amber-200 px-2 py-0.5 text-[10px] uppercase tracking-wide">Draft</span>
+              )}
             </h1>
             <p className="text-xs text-zinc-500 mt-2">
               {new Date(post.frontmatter.date).toLocaleDateString('pt-BR')}
