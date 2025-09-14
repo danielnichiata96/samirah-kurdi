@@ -87,7 +87,7 @@ export default function ServicosPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       {/* Hero */}
-      <Section className="pt-14 pb-10">
+  <Section className="pt-14 pb-10">
         <Container>
           <div className="max-w-3xl space-y-6">
             <p className="text-sm uppercase tracking-wide text-zinc-500">Consultoria</p>
@@ -95,7 +95,7 @@ export default function ServicosPage() {
             <p className="text-lg text-zinc-700">Apoio estratégico e técnico para transformar produção artesanal em operação consistente e lucrativa.</p>
             <div className="flex flex-wrap gap-4">
               {primaryCTA}
-              <Link href="/contato" className="inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-medium border border-zinc-300 hover:bg-zinc-50">Falar primeiro</Link>
+              <Link href="/contato" className="inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-medium border border-zinc-300 hover:bg-zinc-100">Falar primeiro</Link>
             </div>
             <p className="text-xs text-zinc-500">Sem compromisso. Direcionamos se a consultoria faz sentido.</p>
           </div>
@@ -166,11 +166,11 @@ export default function ServicosPage() {
                 indicacao: 'Operações em crescimento.'
               }
             ].map(pkg => (
-              <div key={pkg.nome} className="rounded-xl border border-zinc-200 p-6 bg-[color:var(--surface)]/50 flex flex-col">
+        <div key={pkg.nome} className="rounded-xl border border-zinc-200 p-6 bg-white flex flex-col">
                 <h3 className="font-semibold text-lg mb-2"><span className="font-serif">{pkg.nome}</span></h3>
                 <p className="text-sm text-zinc-700 leading-relaxed mb-4">{pkg.desc}</p>
                 <ul className="text-xs space-y-1 mb-4">
-                  {pkg.inclui.map((i: string) => <li key={i} className="pl-3 relative before:absolute before:left-0 before:top-2 before:h-1.5 before:w-1.5 before:rounded-full before:bg-brand">{i}</li>)}
+          {pkg.inclui.map((i: string) => <li key={i} className="pl-3 relative before:absolute before:left-0 before:top-2 before:h-1.5 before:w-1.5 before:rounded-full before:bg-zinc-900">{i}</li>)}
                 </ul>
                 <p className="text-xs text-zinc-500 mb-4">{pkg.indicacao}</p>
                 <div className="mt-auto">{pkgCTA()}</div>
@@ -187,13 +187,13 @@ export default function ServicosPage() {
             <div className="space-y-5">
               <h2 className="text-2xl font-bold"><span className="font-serif">Por que comigo?</span></h2>
               <ul className="space-y-3 text-sm leading-relaxed">
-                {[`+7 anos em confeitaria e panificação`, `Docência no Senac desde 2022`, `Foco em processos reproducíveis e margem`, `Experiência em salão, delivery e eventos`].map(p => <li key={p} className="pl-4 relative before:absolute before:left-0 before:top-2 before:h-1.5 before:w-1.5 before:rounded-full before:bg-brand">{p}</li>)}
+                {[`+7 anos em confeitaria e panificação`, `Docência no Senac desde 2022`, `Foco em processos reproducíveis e margem`, `Experiência em salão, delivery e eventos`].map(p => <li key={p} className="pl-4 relative before:absolute before:left-0 before:top-2 before:h-1.5 before:w-1.5 before:rounded-full before:bg-zinc-900">{p}</li>)}
               </ul>
             </div>
             <div className="space-y-5">
               <h3 className="text-xl font-semibold">Resultados típicos</h3>
               <ul className="space-y-3 text-sm leading-relaxed">
-                {['Redução de perdas em 10–25%', 'Melhora da margem por produto', 'Time treinado executando sem retrabalho', 'Clareza de prioridades para escalar'].map(r => <li key={r} className="pl-4 relative before:absolute before:left-0 before:top-2 before:h-1.5 before:w-1.5 before:rounded-full before:bg-brand/60">{r}</li>)}
+                {['Redução de perdas em 10–25%', 'Melhora da margem por produto', 'Time treinado executando sem retrabalho', 'Clareza de prioridades para escalar'].map(r => <li key={r} className="pl-4 relative before:absolute before:left-0 before:top-2 before:h-1.5 before:w-1.5 before:rounded-full before:bg-zinc-700">{r}</li>)}
               </ul>
             </div>
           </div>
@@ -232,7 +232,7 @@ export default function ServicosPage() {
               <p className="text-zinc-700">Agende um diagnóstico e receba clareza sobre próximos passos prioritários.</p>
               <div className="flex flex-wrap gap-4">
                 {finalCTA}
-                <Link href="/contato" className="inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-medium border border-zinc-300 hover:bg-zinc-50">Tirar dúvida</Link>
+                <Link href="/contato" className="inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-medium border border-zinc-300 hover:bg-zinc-100">Tirar dúvida</Link>
               </div>
               <p className="text-xs text-zinc-500">Sem compromisso inicial.</p>
             </div>

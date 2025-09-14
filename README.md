@@ -2,6 +2,13 @@
 
 Projeto Next.js 14 + TypeScript + TailwindCSS (App Router) para site de confeitaria.
 
+## Tema / Design
+Paleta atual em modo monocromático (preto, branco e cinzas) para estética clean. Antigas cores verde/rosa removidas. Ajustes principais:
+- Variáveis CSS redefinidas em `styles/globals.css`.
+- Botões agora neutros (`zinc` scale).
+- Header / Footer fundo branco translúcido.
+- Cores voltarão via imagens/fotografia de produtos.
+
 ## Requisitos
 - Node.js >= 18.17
 

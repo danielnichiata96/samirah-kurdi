@@ -10,10 +10,10 @@ export default function Button({ className, variant = 'primary', size = 'md', ..
   const base = 'inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand disabled:opacity-50 disabled:pointer-events-none shadow-sm hover:shadow-md';
   
   const variants: Record<NonNullable<Props['variant']>, string> = {
-    primary: 'bg-brand text-white hover:bg-brand/90 shadow-brand/20',
-    secondary: 'bg-zinc-900 text-white hover:bg-zinc-800 shadow-zinc-900/20',
-    accent: 'bg-accent text-white hover:bg-accent/90 shadow-accent/20',
-    ghost: 'bg-transparent text-zinc-900 hover:bg-zinc-100 shadow-none',
+    primary: 'bg-zinc-900 text-white hover:bg-zinc-800 shadow-none',
+    secondary: 'bg-zinc-200 text-zinc-900 hover:bg-zinc-300 shadow-none',
+    accent: 'bg-white border border-zinc-300 text-zinc-900 hover:bg-zinc-100 shadow-none',
+    ghost: 'bg-transparent text-zinc-800 hover:bg-zinc-100 shadow-none',
   };
   
   const sizes = {

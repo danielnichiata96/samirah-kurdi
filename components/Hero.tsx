@@ -40,7 +40,7 @@ export default function Hero() {
               priority
               sizes="(max-width: 768px) 100vw, 50vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-black/0" aria-hidden="true" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-black/0" aria-hidden="true" />
           </div>
         </div>
       </Container>
