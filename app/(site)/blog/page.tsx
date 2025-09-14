@@ -2,13 +2,26 @@ import Section from '@/components/Section';
 import Container from '@/components/Container';
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/mdx';
+import type { Metadata } from 'next';
+import { buildMetadata, buildBreadcrumbJsonLd } from '@/lib/seo';
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Blog',
+  description: 'Artigos sobre confeitaria profissional, precificação e gestão',
+  path: '/blog',
+});
 
 export default async function BlogPage() {
   const posts = await getAllPosts();
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: 'Início', path: '/' },
+    { name: 'Blog', path: '/blog' },
+  ]);
   return (
     <Section>
       <Container>
         <h1 className="text-3xl font-bold mb-6">Blog</h1>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
         {posts.length === 0 ? (
           <p className="text-zinc-600">Posts em breve.</p>
         ) : (

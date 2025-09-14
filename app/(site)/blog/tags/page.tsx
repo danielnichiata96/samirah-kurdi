@@ -2,16 +2,30 @@ import Section from '@/components/Section';
 import Container from '@/components/Container';
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/mdx';
+import type { Metadata } from 'next';
+import { buildMetadata, buildBreadcrumbJsonLd } from '@/lib/seo';
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Tags',
+  description: 'Nuvem de tags do blog',
+  path: '/blog/tags',
+});
 
 export default async function TagsPage() {
   const posts = await getAllPosts();
   const map = new Map<string, number>();
   posts.forEach((p) => (p.frontmatter.tags || []).forEach((t) => map.set(t, (map.get(t) || 0) + 1)));
   const tags = Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: 'Início', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    { name: 'Tags', path: '/blog/tags' },
+  ]);
   return (
     <Section>
       <Container>
         <h1 className="text-3xl font-bold mb-6">Tags</h1>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
         {tags.length === 0 ? (
           <p className="text-zinc-600">Sem tags ainda.</p>
         ) : (

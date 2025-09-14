@@ -41,7 +41,7 @@ export default function NewsletterForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Seu e-mail"
-        className="flex-1 rounded-md border border-zinc-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand"
+        className="flex-1 rounded-md border border-zinc-300 bg-white text-zinc-900 placeholder:text-zinc-500 dark:bg-zinc-900 dark:border-zinc-700 dark:text-zinc-100 dark:placeholder:text-zinc-400 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand"
         aria-label="E-mail"
       />
       <Button type="submit" disabled={status === 'loading'}>

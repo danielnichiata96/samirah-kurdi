@@ -1,12 +1,28 @@
 import Container from './Container';
 import Link from 'next/link';
+import { siteConfig, getInstagramHandle, getWhatsappLink } from '@/lib/config';
 
 export default function Footer() {
   return (
   <footer className="border-t border-zinc-200 bg-white mt-16">
       <Container className="py-10 text-sm text-zinc-600">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <p>© {new Date().getFullYear()} Confeitaria. Todos os direitos reservados.</p>
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="space-y-1 max-w-xs">
+            <p className="font-medium text-zinc-700">{siteConfig.brand.name}</p>
+            {siteConfig.contact.addressLine && (
+              <p className="not-italic">{siteConfig.contact.addressLine}{siteConfig.contact.city ? `, ${siteConfig.contact.city}` : ''}</p>
+            )}
+            {siteConfig.contact.email && (
+              <p><a href={`mailto:${siteConfig.contact.email}`} className="hover:underline">{siteConfig.contact.email}</a></p>
+            )}
+            {siteConfig.contact.whatsapp && (
+              <p><a href={getWhatsappLink()} className="hover:underline" rel="nofollow noopener" target="_blank">{siteConfig.contact.whatsapp}</a></p>
+            )}
+            {getInstagramHandle().handle && (
+              <p><a href={getInstagramHandle().url} className="hover:underline" target="_blank" rel="noopener">{getInstagramHandle().handle}</a></p>
+            )}
+            <p className="text-zinc-500 pt-2">© {new Date().getFullYear()} {siteConfig.brand.name}</p>
+          </div>
           <nav className="flex gap-4">
             <Link href="/politica-de-privacidade">Política de Privacidade</Link>
             <Link href="/termos">Termos</Link>

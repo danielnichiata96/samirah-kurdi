@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Fraunces, Space_Grotesk } from 'next/font/google';
 import '@/styles/globals.css';
+import { getLocalBusinessJsonLd } from '@/lib/config';
+import { defaultMetadata } from '@/lib/seo';
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -16,15 +18,19 @@ const spaceGrotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
 });
 
-export const metadata: Metadata = {
-  title: 'Confeitaria | Site',
-  description: 'Consultoria e Aulas de Confeitaria Profissional',
-};
+export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-br" className={`${fraunces.variable} ${spaceGrotesk.variable}`}>
-      <body className="font-sans antialiased text-zinc-900">{children}</body>
+  <html lang="pt-BR" className={`${fraunces.variable} ${spaceGrotesk.variable}`}>
+      <body className="font-sans antialiased text-zinc-900">
+        {children}
+        <script
+          type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: conteúdo controlado
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(getLocalBusinessJsonLd()) }}
+        />
+      </body>
     </html>
   );
 }

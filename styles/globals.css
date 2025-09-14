@@ -60,4 +60,27 @@ html, body { height: 100%; }
   a:hover { color: var(--gray-700); }
   ::selection { background: var(--gray-900); color: #fff; }
   :focus-visible { outline-color: var(--gray-900); }
+  /* Campos de formulário padrões (evita fundo escuro automático do UA / dark mode forçado) */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  textarea, select {
+    background-color: var(--gray-0);
+    color: var(--gray-900);
+    border: 1px solid var(--gray-300);
+  }
+  input::placeholder, textarea::placeholder { color: var(--gray-500); }
+  @media (prefers-color-scheme: dark) {
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="search"],
+    textarea, select {
+      background-color: var(--gray-900);
+      color: var(--gray-100);
+      border-color: var(--gray-700);
+    }
+    input::placeholder, textarea::placeholder { color: var(--gray-400); }
+  }
 }

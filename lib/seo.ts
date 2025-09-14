@@ -1,15 +1,139 @@
 import type { Metadata } from 'next';
+import { siteConfig } from './config';
 
+// Metadata base do site. Evite repetir textos em páginas.
 export const defaultMetadata: Metadata = {
-  title: 'Confeitaria',
-  description: 'Consultoria e Aulas de Confeitaria Profissional',
+  title: siteConfig.brand.name,
+  description: siteConfig.brand.slogan,
+  metadataBase: new URL(siteConfig.baseUrl),
   openGraph: {
-    title: 'Confeitaria',
-    description: 'Consultoria e Aulas de Confeitaria Profissional',
+    title: siteConfig.brand.name,
+    description: siteConfig.brand.slogan,
     type: 'website',
     locale: 'pt_BR',
+    url: siteConfig.baseUrl,
+    images: [
+      {
+        url: '/images/hero.svg',
+        width: 1200,
+        height: 630,
+        alt: siteConfig.brand.name,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
   },
+  alternates: {
+    canonical: siteConfig.baseUrl,
+  },
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
+
+type BuildMetaInput = {
+  title?: string;
+  description?: string;
+  path?: string; // caminho relativo começando com /
+  image?: string; // caminho absoluto ou relativo ao site
+  publishedTime?: string; // ISO
+  modifiedTime?: string; // ISO
+  tags?: string[];
+};
+
+// Helper para compor Metadata de páginas reutilizando defaults.
+export function buildMetadata(input: BuildMetaInput = {}): Metadata {
+  const {
+    title,
+    description,
+    path = '/',
+    image,
+    publishedTime,
+    modifiedTime,
+    tags = [],
+  } = input;
+
+  const url = new URL(path, siteConfig.baseUrl).toString();
+  const imgUrl = image ? (image.startsWith('http') ? image : new URL(image, siteConfig.baseUrl).toString()) : undefined;
+
+  return {
+    ...defaultMetadata,
+    title: title ? `${title} | ${siteConfig.brand.name}` : defaultMetadata.title,
+    description: description || defaultMetadata.description,
+    alternates: { canonical: url },
+    openGraph: {
+      ...defaultMetadata.openGraph,
+      url,
+      title: title ? `${title} | ${siteConfig.brand.name}` : defaultMetadata.openGraph?.title,
+      description: description || defaultMetadata.openGraph?.description,
+      ...(imgUrl ? { images: [{ url: imgUrl }] } : {}),
+      ...(publishedTime || modifiedTime
+        ? { article: { publishedTime, modifiedTime, authors: [siteConfig.brand.name] } }
+        : {}),
+    },
+    twitter: {
+      ...defaultMetadata.twitter,
+      ...(imgUrl ? { images: [imgUrl] } : {}),
+    },
+    // Palavras chave adicionais derivadas de tags
+    keywords: tags.length ? Array.from(new Set([...(tags || [])])) : defaultMetadata.keywords,
+  } as Metadata;
+}
+
+// Gera JSON-LD para um artigo/post de blog.
+export function buildArticleJsonLd(args: {
+  slug: string;
+  title: string;
+  description?: string;
+  date: string; // ISO
+  modified?: string; // ISO
+  cover?: string;
+  tags?: string[];
+  wordCount?: number;
+}) {
+  const { slug, title, description, date, modified, cover, tags = [], wordCount } = args;
+  const url = new URL(`/blog/${slug}`, siteConfig.baseUrl).toString();
+  const image = cover
+    ? [cover.startsWith('http') ? cover : new URL(cover, siteConfig.baseUrl).toString()]
+    : undefined;
+  const logoUrl = new URL('/images/avatar.svg', siteConfig.baseUrl).toString();
+  const data: Record<string, any> = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    headline: title,
+    name: title,
+    description: description || siteConfig.brand.slogan,
+    datePublished: date,
+    dateModified: modified || date,
+    author: { '@type': 'Organization', name: siteConfig.brand.name },
+    publisher: {
+      '@type': 'Organization',
+      name: siteConfig.brand.name,
+      logo: { '@type': 'ImageObject', url: logoUrl }
+    },
+    isAccessibleForFree: true,
+  };
+  if (image) data.image = image;
+  if (tags.length) data.keywords = tags.join(', ');
+  if (tags.length) data.articleSection = tags[0];
+  if (wordCount) data.wordCount = wordCount;
+  return data;
+}
+
+// BreadcrumbList JSON-LD
+export function buildBreadcrumbJsonLd(items: { name: string; path: string }[]) {
+  const itemListElement = items.map((it, idx) => ({
+    '@type': 'ListItem',
+    position: idx + 1,
+    name: it.name,
+    item: new URL(it.path, siteConfig.baseUrl).toString(),
+  }));
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement,
+  };
+}
+

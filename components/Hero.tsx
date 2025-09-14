@@ -1,13 +1,11 @@
 import Container from './Container';
 import Button from './Button';
 import Image from 'next/image';
-import fs from 'fs';
-import path from 'path';
+import { getHeroImage } from '@/lib/hero';
+import Link from 'next/link';
 
 export default function Hero() {
-  const candidate = path.join(process.cwd(), 'public', 'images', 'hero.jpg');
-  const hasUserHero = fs.existsSync(candidate);
-  const heroSrc = hasUserHero ? '/images/hero.jpg' : '/images/hero.svg';
+  const heroSrc = getHeroImage();
   
   return (
     <div className="relative">
@@ -23,12 +21,12 @@ export default function Hero() {
               </p>
             </div>
             <div className="flex items-center gap-4 flex-wrap">
-              <Button size="lg" className="px-8 py-4 text-base font-medium">
-                Agendar Consultoria
-              </Button>
-              <Button variant="accent" size="lg" className="px-8 py-4 text-base font-medium">
-                Comprar E-book
-              </Button>
+              <Link href="/contato" className="inline-flex">
+                <Button size="lg" className="px-8 py-4 text-base font-medium">Agendar Consultoria</Button>
+              </Link>
+              <Link href="/ebooks" className="inline-flex">
+                <Button variant="accent" size="lg" className="px-8 py-4 text-base font-medium">Comprar E-book</Button>
+              </Link>
             </div>
           </div>
           <div className="relative aspect-[3/4] md:aspect-[2/3] w-full max-h-[var(--hero-max-h)] overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5">

@@ -16,6 +16,13 @@ export const siteConfig = {
     whatsapp: str('CONTACT_WHATSAPP'), // formato livre: +55 11 9XXXX-XXXX
     email: str('CONTACT_EMAIL'),
     instagram: str('SOCIAL_INSTAGRAM'),
+  addressLine: str('CONTACT_ADDRESS_LINE'),
+  city: str('CONTACT_ADDRESS_CITY'),
+  region: str('CONTACT_ADDRESS_REGION'),
+  postalCode: str('CONTACT_ADDRESS_POSTAL_CODE'),
+  country: str('CONTACT_ADDRESS_COUNTRY', 'BR'),
+  latitude: str('CONTACT_LATITUDE'),
+  longitude: str('CONTACT_LONGITUDE'),
   },
   commerce: {
     checkoutEbook: str('CHECKOUT_EBOOK_URL'),
@@ -37,4 +44,33 @@ export function getWhatsappLink() {
   if (!raw) return '';
   const digits = raw.replace(/\D/g, '');
   return `https://wa.me/${digits}`;
+}
+
+export function getLocalBusinessJsonLd() {
+  const { brand, contact, baseUrl } = siteConfig as any;
+  const addrPresent = contact.addressLine && contact.city;
+  const geoPresent = contact.latitude && contact.longitude;
+  const data: any = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: brand.name,
+    description: brand.slogan,
+    url: baseUrl,
+  };
+  if (contact.email) data.email = contact.email;
+  if (contact.whatsapp) data.telephone = contact.whatsapp;
+  if (addrPresent) {
+    data.address = {
+      '@type': 'PostalAddress',
+      streetAddress: contact.addressLine,
+      addressLocality: contact.city,
+      addressRegion: contact.region,
+      postalCode: contact.postalCode,
+      addressCountry: contact.country || 'BR'
+    };
+  }
+  if (geoPresent) {
+    data.geo = { '@type': 'GeoCoordinates', latitude: contact.latitude, longitude: contact.longitude };
+  }
+  return data;
 }
