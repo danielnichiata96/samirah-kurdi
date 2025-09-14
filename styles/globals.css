@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Paleta: verde e rosa */
+  --brand: #64A002; /* primário (verde) */
+  /* Rosa secundário levemente mais claro (antes: #FE5668) */
+  --brand-secondary: #FF6B7A; /* secundário (rosa claro) */
+  /* Superfície creme clara */
+  --surface: #FAF7F2;
+  /* Altura máxima do hero (ajustável) */
+  --hero-max-h: 640px;
+}
+
+html, body { height: 100%; }
+
+@layer base {
+  :root {
+    --font-fraunces: 'Fraunces', ui-serif, Georgia, serif;
+    --font-space-grotesk: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  }
+  body { 
+    font-family: var(--font-space-grotesk);
+  }
+  h1, h2, h3, h4, h5, h6 { 
+    font-family: var(--font-fraunces);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+  h1 {
+    font-weight: 700;
+    letter-spacing: -0.05em;
+  }
+}
+
+/* Typography tweaks */
+.prose :where(img):not(:where([class~="not-prose"] *)) {
+  border-radius: 0.5rem;
+}

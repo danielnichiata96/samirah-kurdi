@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-label="Imagem placeholder">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#FEF3F5"/>
+      <stop offset="100%" stop-color="#F0F9F0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#g)"/>
+  <circle cx="260" cy="360" r="140" fill="#FE5668" opacity="0.15"/>
+  <rect x="520" y="260" width="480" height="320" rx="24" fill="#64A002" opacity="0.12"/>
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="42" fill="#6B7280">Substitua por sua foto</text>
+</svg>

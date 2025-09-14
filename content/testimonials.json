@@ -1,0 +1,20 @@
+[
+  {
+    "nome": "Ana Paula",
+    "cidade": "São Paulo - SP",
+    "depoimento": "As aulas mudaram meu negócio, recomendo!",
+    "foto": "/images/avatar.svg"
+  },
+  {
+    "nome": "Marcos Silva",
+    "cidade": "Rio de Janeiro - RJ",
+    "depoimento": "Ótimas dicas de precificação e padronização.",
+    "foto": "/images/avatar.svg"
+  },
+  {
+    "nome": "Luiza Rocha",
+    "cidade": "Belo Horizonte - MG",
+    "depoimento": "Conteúdo direto ao ponto e aplicável.",
+    "foto": "/images/avatar.svg"
+  }
+]
