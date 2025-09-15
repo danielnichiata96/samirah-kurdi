@@ -72,16 +72,20 @@ html, body { height: 100%; }
     border: 1px solid var(--gray-300);
   }
   input::placeholder, textarea::placeholder { color: var(--gray-500); }
+  /* Keep form fields visually consistent (light background) even when the
+     user prefers dark color-scheme. This prevents unexpected dark inputs
+     that clash with the site's light panels. */
   @media (prefers-color-scheme: dark) {
     input[type="text"],
     input[type="email"],
     input[type="password"],
     input[type="search"],
     textarea, select {
-      background-color: var(--gray-900);
-      color: var(--gray-100);
-      border-color: var(--gray-700);
+      /* Force the same light input surface used in light mode */
+      background-color: var(--gray-0);
+      color: var(--gray-900);
+      border-color: var(--gray-300);
     }
-    input::placeholder, textarea::placeholder { color: var(--gray-400); }
+    input::placeholder, textarea::placeholder { color: var(--gray-500); }
   }
 }
