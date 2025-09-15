@@ -12,6 +12,7 @@ export type PostFrontmatter = {
   date: string; // ISO
   excerpt?: string;
   cover?: string;
+  image?: string;
   tags?: string[];
   draft?: boolean;
 };
@@ -29,6 +30,7 @@ const FrontmatterSchema = z.object({
   date: z.string().refine((d: string) => !Number.isNaN(Date.parse(d)), 'Data inválida'),
   excerpt: z.string().max(300).optional(),
   cover: z.string().url().or(z.string().startsWith('/')).optional(),
+  image: z.string().url().or(z.string().startsWith('/')).optional(),
   tags: z.array(z.string().min(1).max(30)).max(8).optional(),
   draft: z.boolean().optional(),
 });

@@ -30,24 +30,27 @@ export default async function BlogPage() {
         {pagePosts.length === 0 ? (
           <p className="text-zinc-600">Posts em breve.</p>
         ) : (
-          <ul className="space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {pagePosts.map((p) => (
-              <li key={p.slug} className="border-b border-zinc-200 pb-6">
-                <h2 className="text-xl font-semibold flex items-center gap-2 flex-wrap">
-                  <Link href={`/blog/${p.slug}`} className="hover:underline">
-                    <span className="font-sans">{p.frontmatter.title}</span>
-                  </Link>
-                  {isDev && p.frontmatter.draft && (
-                    <span className="inline-block rounded bg-amber-100 text-amber-700 border border-amber-200 px-2 py-0.5 text-[10px] uppercase tracking-wide">Draft</span>
-                  )}
-                </h2>
-                <p className="text-xs text-zinc-500 mt-1">{new Date(p.frontmatter.date).toLocaleDateString('pt-BR')}</p>
-                {p.frontmatter.excerpt && (
-                  <p className="text-zinc-700 mt-2">{p.frontmatter.excerpt}</p>
-                )}
-              </li>
+              <article key={p.slug} className="group">
+                <Link href={`/blog/${p.slug}`} className="block">
+                  <div className="overflow-hidden rounded-xl bg-white shadow-sm border border-zinc-200">
+                    { (p.frontmatter.cover ?? p.frontmatter.image) ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={p.frontmatter.cover ?? p.frontmatter.image} alt={p.frontmatter.title} className="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-200" />
+                    ) : (
+                      <div className="w-full h-44 bg-zinc-100 flex items-center justify-center text-zinc-400">Imagem</div>
+                    )}
+                    <div className="p-4">
+                      <h3 className="text-lg font-semibold text-zinc-900">{p.frontmatter.title}</h3>
+                      <p className="text-xs text-zinc-500 mt-1">{new Date(p.frontmatter.date).toLocaleDateString('pt-BR')}</p>
+                      {p.frontmatter.excerpt && <p className="text-zinc-700 mt-2 line-clamp-3">{p.frontmatter.excerpt}</p>}
+                    </div>
+                  </div>
+                </Link>
+              </article>
             ))}
-          </ul>
+          </div>
         )}
         {totalPages > 1 && (
           <nav aria-label="Paginação" className="mt-10 flex items-center justify-between text-sm">
