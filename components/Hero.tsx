@@ -28,7 +28,7 @@ export default async function Hero() {
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-black/10" aria-hidden="true" />
             <div className="relative h-full flex flex-col justify-end p-6 md:p-8 lg:p-10">
               <p className="text-xs md:text-sm uppercase tracking-[0.2em] text-zinc-200">Novo post</p>
-              <h2 className="mt-2 text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[0.95] drop-shadow-sm">
+              <h2 className="mt-2 text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[0.95] drop-shadow-sm text-white">
                 {latest ? latest.frontmatter.title : 'Conteúdo em breve'}
               </h2>
               <div className="mt-6">
