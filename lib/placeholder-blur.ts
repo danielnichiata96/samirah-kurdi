@@ -1,0 +1,1 @@
+export const placeholderBlurDataURL = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNicgaGVpZ2h0PScxMCcgdmlld0JveD0nMCAwIDE2IDEwJz48cmVjdCB3aWR0aD0nMTYnIGhlaWdodD0nMTAnIHJ4PScyJyBmaWxsPSclMjNGRkY2RUInIC8+PC9zdmc+";

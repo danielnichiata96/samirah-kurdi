@@ -3,6 +3,7 @@ import Container from '@/components/Container';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getAllPosts } from '@/lib/mdx';
+import { placeholderBlurDataURL } from '@/lib/placeholder-blur';
 import type { Metadata } from 'next';
 import { buildMetadata, buildBreadcrumbJsonLd } from '@/lib/seo';
 
@@ -47,7 +48,7 @@ export default async function BlogPage() {
                           className="object-cover group-hover:scale-105 transition-transform duration-200"
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           placeholder="blur"
-                          blurDataURL="/images/placeholder-article.jpg"
+                          blurDataURL={placeholderBlurDataURL}
                         />
                       </div>
                       <div className="p-4">
