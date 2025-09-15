@@ -1,6 +1,7 @@
 import Section from '@/components/Section';
 import Container from '@/components/Container';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getAllPosts } from '@/lib/mdx';
 import type { Metadata } from 'next';
 import { buildMetadata, buildBreadcrumbJsonLd } from '@/lib/seo';
@@ -22,6 +23,7 @@ export default async function BlogPage() {
     { name: 'Blog', path: '/blog' },
   ]);
   const isDev = process.env.NODE_ENV !== 'production';
+
   return (
     <Section>
       <Container>
@@ -31,27 +33,36 @@ export default async function BlogPage() {
           <p className="text-zinc-600">Posts em breve.</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {pagePosts.map((p) => (
-              <article key={p.slug} className="group">
-                <Link href={`/blog/${p.slug}`} className="block">
-                  <div className="overflow-hidden rounded-xl bg-white shadow-sm border border-zinc-200">
-                    { (p.frontmatter.cover ?? p.frontmatter.image) ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={p.frontmatter.cover ?? p.frontmatter.image} alt={p.frontmatter.title} className="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-200" />
-                    ) : (
-                      <div className="w-full h-44 bg-zinc-100 flex items-center justify-center text-zinc-400">Imagem</div>
-                    )}
-                    <div className="p-4">
-                      <h3 className="text-lg font-semibold text-zinc-900">{p.frontmatter.title}</h3>
-                      <p className="text-xs text-zinc-500 mt-1">{new Date(p.frontmatter.date).toLocaleDateString('pt-BR')}</p>
-                      {p.frontmatter.excerpt && <p className="text-zinc-700 mt-2 line-clamp-3">{p.frontmatter.excerpt}</p>}
+            {pagePosts.map((p) => {
+              const imgSrc = p.frontmatter.cover ?? p.frontmatter.image ?? '/images/placeholder-article.jpg';
+              return (
+                <article key={p.slug} className="group">
+                  <Link href={`/blog/${p.slug}`} className="block">
+                    <div className="overflow-hidden rounded-xl bg-white shadow-sm border border-zinc-200">
+                      <div className="relative w-full h-44">
+                        <Image
+                          src={imgSrc}
+                          alt={p.frontmatter.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-200"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          placeholder="blur"
+                          blurDataURL="/images/placeholder-article.jpg"
+                        />
+                      </div>
+                      <div className="p-4">
+                        <h3 className="text-lg font-semibold text-zinc-900">{p.frontmatter.title}</h3>
+                        <p className="text-xs text-zinc-500 mt-1">{new Date(p.frontmatter.date).toLocaleDateString('pt-BR')}</p>
+                        {p.frontmatter.excerpt && <p className="text-zinc-700 mt-2 line-clamp-3">{p.frontmatter.excerpt}</p>}
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </article>
-            ))}
+                  </Link>
+                </article>
+              );
+            })}
           </div>
         )}
+
         {totalPages > 1 && (
           <nav aria-label="Paginação" className="mt-10 flex items-center justify-between text-sm">
             <span className="text-zinc-500">Página 1 de {totalPages}</span>
