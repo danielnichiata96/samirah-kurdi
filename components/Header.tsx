@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Container from './Container';
 import ActiveLink from './ActiveLink';
 import { SocialLink } from './SocialIcon';
+import Button from './Button';
 import { getSocialUrls } from '@/lib/config';
 
 export default function Header() {
@@ -24,11 +25,8 @@ export default function Header() {
           <SocialLink href={socials.pinterest} network="pinterest" label="Pinterest" />
           <SocialLink href={socials.tiktok} network="tiktok" label="TikTok" />
           <SocialLink href={socials.instagram} network="instagram" label="Instagram" />
-          <Link
-            href="#agendar"
-            className="hidden sm:inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors border border-zinc-300 hover:bg-zinc-100"
-          >
-            Agendar consultoria
+          <Link href="#agendar" className="hidden sm:inline-flex">
+            <Button variant="accent" size="sm">Agendar consultoria</Button>
           </Link>
         </div>
       </Container>
