@@ -14,9 +14,10 @@ export default function Header() {
         </Link>
         <nav aria-label="Principal" className="hidden md:flex items-center gap-6 text-sm text-zinc-700">
           <ActiveLink href="/sobre">Sobre</ActiveLink>
-          <ActiveLink href="/servicos">Serviços</ActiveLink>
+          <ActiveLink href={'/receitas' as any}>Receitas</ActiveLink>
           <ActiveLink href="/ebooks">E-books</ActiveLink>
           <ActiveLink href="/blog">Blog</ActiveLink>
+          <ActiveLink href="/servicos">Serviços</ActiveLink>
           <ActiveLink href="/contato">Contato</ActiveLink>
         </nav>
         <div className="flex items-center gap-2">
