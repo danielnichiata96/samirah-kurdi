@@ -57,22 +57,22 @@ export default function HomePage() {
             </div>
 
             {/* Grade com 3 itens */}
-            <div className="md:col-span-3 grid gap-6 sm:grid-cols-3">
+              <div className="md:col-span-3 grid gap-6 sm:grid-cols-3">
               <div>
                 <div className="relative aspect-square w-full overflow-hidden rounded-lg ring-1 ring-black/5 bg-zinc-100">
-                  <Image src="/images/hero.jpg" alt="Doces para se inspirar" fill className="object-cover" sizes="(max-width: 640px) 100vw, 33vw" />
+                  <Image src="/images/cards/card_1.png" alt="Doces para se inspirar" fill className="object-cover" sizes="(max-width: 640px) 100vw, 33vw" />
                 </div>
                 <p className="mt-3 text-xs uppercase tracking-wide text-zinc-600 text-center">Novas receitas para se inspirar</p>
               </div>
               <div>
                 <div className="relative aspect-square w-full overflow-hidden rounded-lg ring-1 ring-black/5 bg-zinc-100">
-                  <Image src="/images/hero.svg" alt="Informações técnicas" fill className="object-cover" sizes="(max-width: 640px) 100vw, 33vw" />
+                  <Image src="/images/cards/card_2.png" alt="Informações técnicas" fill className="object-cover" sizes="(max-width: 640px) 100vw, 33vw" />
                 </div>
                 <p className="mt-3 text-xs uppercase tracking-wide text-zinc-600 text-center">Informações técnicas para aprimorar suas habilidades</p>
               </div>
               <div>
                 <div className="relative aspect-square w-full overflow-hidden rounded-lg ring-1 ring-black/5 bg-zinc-100">
-                  <Image src="/images/avatar.svg" alt="Consultorias personalizadas" fill className="object-cover" sizes="(max-width: 640px) 100vw, 33vw" />
+                  <Image src="/images/cards/card_3.png" alt="Consultorias personalizadas" fill className="object-cover" sizes="(max-width: 640px) 100vw, 33vw" />
                 </div>
                 <p className="mt-3 text-xs uppercase tracking-wide text-zinc-600 text-center">Consultorias personalizadas para o seu negócio</p>
               </div>
