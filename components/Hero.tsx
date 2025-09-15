@@ -1,44 +1,68 @@
 import Container from './Container';
 import Button from './Button';
 import Image from 'next/image';
-import { getHeroImage } from '@/lib/hero';
 import Link from 'next/link';
+import { getAllPosts } from '@/lib/mdx';
+import { getHeroImage } from '@/lib/hero';
 
-export default function Hero() {
-  const heroSrc = getHeroImage();
-  
+export default async function Hero() {
+  // Destaque: último post do blog
+  const posts = await getAllPosts();
+  const latest = posts[0];
+  const cover = latest?.frontmatter.cover || getHeroImage();
+
   return (
     <div className="relative">
-      <Container className="py-16 md:py-24 lg:py-32">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="space-y-8">
-            <div className="space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]">
-                Consultoria e Aulas de Confeitaria Profissional
-              </h1>
-              <p className="text-lg md:text-xl text-zinc-600 leading-relaxed max-w-lg">
-                Ajudamos confeiteiros(as) a padronizar receitas, precificar e vender mais.
-              </p>
-            </div>
-            <div className="flex items-center gap-4 flex-wrap">
-              <Link href="/contato" className="inline-flex">
-                <Button size="lg" className="px-8 py-4 text-base font-medium">Agendar Consultoria</Button>
-              </Link>
-              <Link href="/ebooks" className="inline-flex">
-                <Button variant="accent" size="lg" className="px-8 py-4 text-base font-medium">Comprar E-book</Button>
-              </Link>
-            </div>
-          </div>
-          <div className="relative aspect-[3/4] md:aspect-[2/3] w-full max-h-[var(--hero-max-h)] overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5">
+      <Container className="py-12 md:py-20 lg:py-24">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-stretch">
+          {/* Coluna esquerda: Destaque do blog */}
+          <div className="relative overflow-hidden rounded-2xl ring-1 ring-black/5 bg-zinc-900 text-white min-h-[320px] md:min-h-[420px]">
             <Image
-              src={heroSrc}
-              alt="Chef confeiteira trabalhando em bolo"
+              src={cover}
+              alt={latest ? latest.frontmatter.title : 'Destaque do blog'}
               fill
               className="object-cover"
               priority
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-black/0" aria-hidden="true" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-black/10" aria-hidden="true" />
+            <div className="relative h-full flex flex-col justify-end p-6 md:p-8 lg:p-10">
+              <p className="text-xs md:text-sm uppercase tracking-[0.2em] text-zinc-200">Novo post</p>
+              <h2 className="mt-2 text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[0.95] drop-shadow-sm">
+                {latest ? latest.frontmatter.title : 'Conteúdo em breve'}
+              </h2>
+              <div className="mt-6">
+                {latest ? (
+                  <Link href={`/blog/${latest.slug}`} className="inline-flex">
+                    <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base shadow-[3px_3px_0_#D4D4D8]">
+                      Leia já →
+                    </Button>
+                  </Link>
+                ) : (
+                  <Link href="/blog" className="inline-flex">
+                    <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base">Ver blog</Button>
+                  </Link>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Coluna direita: Consultoria + E-book */}
+          <div className="flex">
+            <div className="relative flex-1 rounded-2xl border border-zinc-200 bg-[color:var(--surface)] p-6 md:p-8 lg:p-10 shadow-sm">
+              <h1 className="text-3xl md:text-4xl font-bold leading-tight">Consultoria e Aulas de Confeitaria Profissional</h1>
+              <p className="mt-3 text-zinc-700 md:text-lg max-w-prose">
+                Ajudamos confeiteiros(as) a padronizar receitas, precificar e vender mais.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <Link href="/contato" className="inline-flex">
+                  <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base shadow-[3px_3px_0_#D4D4D8]">Agendar consultoria</Button>
+                </Link>
+                <Link href="/ebooks" className="inline-flex">
+                  <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base shadow-[3px_3px_0_#D4D4D8]">Comprar e-book</Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </Container>
