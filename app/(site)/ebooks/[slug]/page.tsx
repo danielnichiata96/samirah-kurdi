@@ -47,7 +47,7 @@ export default function EbookDetailPage({ params }: { params: { slug: string } }
           <div className="grid lg:grid-cols-2 gap-10 items-start">
             <div className="space-y-6 order-2 lg:order-1">
               <p className="text-sm uppercase tracking-wide text-zinc-500">E-book</p>
-              <h1 className="text-4xl font-bold leading-tight"><span className="font-serif">{ebook.titulo}</span></h1>
+              <h1 className="text-4xl font-bold leading-tight"><span className="font-sans">{ebook.titulo}</span></h1>
               <p className="text-lg text-zinc-700 max-w-prose">{ebook.descricao}</p>
               <div className="flex items-center gap-6">
                 <span className="text-2xl font-semibold">
@@ -73,7 +73,7 @@ export default function EbookDetailPage({ params }: { params: { slug: string } }
       {ebook.beneficios && (
         <Section className="py-12 bg-[color:var(--surface)]/60">
           <Container>
-            <h2 className="text-2xl font-bold mb-6"><span className="font-serif">O que você ganha</span></h2>
+            <h2 className="text-2xl font-bold mb-6"><span className="font-sans">O que você ganha</span></h2>
             <ul className="grid sm:grid-cols-2 gap-4">
               {ebook.beneficios.map((b: string) => (
                 <li key={b} className="rounded-lg border border-zinc-200 bg-white p-4 text-sm leading-relaxed">
@@ -115,7 +115,7 @@ export default function EbookDetailPage({ params }: { params: { slug: string } }
       {ebook.sumario && (
         <Section className="py-14 bg-white">
           <Container>
-            <h2 className="text-2xl font-bold mb-6"><span className="font-serif">Sumário</span></h2>
+            <h2 className="text-2xl font-bold mb-6"><span className="font-sans">Sumário</span></h2>
             <ol className="space-y-2 text-sm list-decimal pl-6">
               {ebook.sumario.map((c: string) => <li key={c}>{c}</li>)}
             </ol>
@@ -127,7 +127,7 @@ export default function EbookDetailPage({ params }: { params: { slug: string } }
       {ebook.faq && (
         <Section className="py-16 bg-[color:var(--surface)]/50">
           <Container>
-            <h2 className="text-2xl font-bold mb-8"><span className="font-serif">Perguntas frequentes</span></h2>
+            <h2 className="text-2xl font-bold mb-8"><span className="font-sans">Perguntas frequentes</span></h2>
             <div className="space-y-6">
               {ebook.faq.map((item: any) => (
                 <div key={item.q} className="rounded-lg border border-zinc-200 bg-white p-5">
@@ -145,7 +145,7 @@ export default function EbookDetailPage({ params }: { params: { slug: string } }
         <Container>
           <div className="rounded-2xl border border-zinc-200 p-8 md:p-12 bg-gradient-to-br from-brand/10 via-white to-white">
             <div className="max-w-2xl space-y-6">
-              <h2 className="text-3xl font-bold leading-tight"><span className="font-serif">Pronto para padronizar seus brigadeiros?</span></h2>
+              <h2 className="text-3xl font-bold leading-tight"><span className="font-sans">Pronto para padronizar seus brigadeiros?</span></h2>
               <p className="text-zinc-700 text-base">Garanta acesso imediato e comece hoje a produzir com consistência e margem clara.</p>
               <a
                 href={checkoutUrl}

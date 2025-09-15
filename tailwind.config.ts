@@ -18,7 +18,6 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['var(--font-space-grotesk)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        serif: ['var(--font-fraunces)', 'ui-serif', 'Georgia', 'serif'],
   display: ['var(--font-bodoni)', 'Georgia', 'serif'],
       },
       animation: {

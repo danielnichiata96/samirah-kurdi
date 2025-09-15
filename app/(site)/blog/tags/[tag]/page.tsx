@@ -40,13 +40,13 @@ export default async function TagPage({ params }: { params: { tag: string } }) {
   return (
     <Section>
       <Container>
-        <h1 className="text-3xl font-bold mb-6">Tag: <span className="font-serif">{tag}</span></h1>
+  <h1 className="text-3xl font-bold mb-6">Tag: <span className="font-sans">{tag}</span></h1>
         <ul className="space-y-6">
           {filtered.map((p) => (
             <li key={p.slug} className="border-b border-zinc-200 pb-6">
               <h2 className="text-xl font-semibold">
                 <Link href={`/blog/${p.slug}`} className="hover:underline">
-                  <span className="font-serif">{p.frontmatter.title}</span>
+                  <span className="font-sans">{p.frontmatter.title}</span>
                 </Link>
               </h2>
               <p className="text-xs text-zinc-500 mt-1">{new Date(p.frontmatter.date).toLocaleDateString('pt-BR')}</p>

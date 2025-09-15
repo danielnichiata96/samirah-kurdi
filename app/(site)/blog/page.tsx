@@ -35,7 +35,7 @@ export default async function BlogPage() {
               <li key={p.slug} className="border-b border-zinc-200 pb-6">
                 <h2 className="text-xl font-semibold flex items-center gap-2 flex-wrap">
                   <Link href={`/blog/${p.slug}`} className="hover:underline">
-                    <span className="font-serif">{p.frontmatter.title}</span>
+                    <span className="font-sans">{p.frontmatter.title}</span>
                   </Link>
                   {isDev && p.frontmatter.draft && (
                     <span className="inline-block rounded bg-amber-100 text-amber-700 border border-amber-200 px-2 py-0.5 text-[10px] uppercase tracking-wide">Draft</span>

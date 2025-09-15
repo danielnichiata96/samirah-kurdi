@@ -18,7 +18,7 @@ export default function EbookCard({ titulo, descricao, preco, capa = '/images/eb
       <div className="aspect-[4/3] w-full overflow-hidden rounded-md mb-3 bg-zinc-50">
         <Image src={capa} alt={titulo} width={640} height={480} className="h-full w-full object-cover" />
       </div>
-      <h3 className="font-semibold mb-1"><span className="font-serif">{titulo}</span></h3>
+  <h3 className="font-semibold mb-1"><span className="font-sans">{titulo}</span></h3>
       <p className="text-sm text-zinc-600 mb-3">{descricao}</p>
           <div className="flex items-center justify-between">
             {typeof preco === 'number' ? (

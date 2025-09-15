@@ -26,7 +26,6 @@ html, body { height: 100%; }
 
 @layer base {
   :root {
-    --font-fraunces: 'Fraunces', ui-serif, Georgia, serif;
     --font-space-grotesk: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
   }
   body { 
@@ -35,7 +34,7 @@ html, body { height: 100%; }
     color: var(--gray-800);
   }
   h1, h2, h3, h4, h5, h6 { 
-    font-family: var(--font-fraunces);
+  font-family: var(--font-space-grotesk);
     font-weight: 600;
     letter-spacing: -0.03em;
     color: var(--gray-900);

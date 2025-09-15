@@ -62,7 +62,7 @@ export default function SobrePage() {
             <div className="space-y-4">
               <p className="text-sm uppercase tracking-wide text-zinc-500">Sobre</p>
               <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                <span className="font-serif">Samirah Kurdi</span>
+                <span className="font-sans">Samirah Kurdi</span>
               </h1>
               <p className="text-zinc-600">Confeitaria • Consultoria</p>
               <p className="text-zinc-700 max-w-prose">

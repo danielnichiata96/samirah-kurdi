@@ -91,7 +91,7 @@ export default function ServicosPage() {
         <Container>
           <div className="max-w-3xl space-y-6">
             <p className="text-sm uppercase tracking-wide text-zinc-500">Consultoria</p>
-            <h1 className="text-4xl font-bold leading-tight"><span className="font-serif">Padronize. Precifique. Escale.</span></h1>
+            <h1 className="text-4xl font-bold leading-tight"><span className="font-sans">Padronize. Precifique. Escale.</span></h1>
             <p className="text-lg text-zinc-700">Apoio estratégico e técnico para transformar produção artesanal em operação consistente e lucrativa.</p>
             <div className="flex flex-wrap gap-4">
               {primaryCTA}
@@ -105,7 +105,7 @@ export default function ServicosPage() {
       {/* Problemas */}
       <Section className="py-14 bg-[color:var(--surface)]/60">
         <Container>
-          <h2 className="text-2xl font-bold mb-6"><span className="font-serif">Reconhece algum destes cenários?</span></h2>
+          <h2 className="text-2xl font-bold mb-6"><span className="font-sans">Reconhece algum destes cenários?</span></h2>
           <div className="grid md:grid-cols-2 gap-6 text-sm">
             {[
               'Receitas variam a cada lote e faltam padrões.',
@@ -124,7 +124,7 @@ export default function ServicosPage() {
       {/* Como funciona */}
       <Section className="py-16">
         <Container>
-          <h2 className="text-2xl font-bold mb-10"><span className="font-serif">Como funciona</span></h2>
+          <h2 className="text-2xl font-bold mb-10"><span className="font-sans">Como funciona</span></h2>
           <ol className="grid md:grid-cols-4 gap-6 text-sm">
             {[
               { t: '1. Diagnóstico', d: 'Mapeamos receitas, fluxo, gargalos e custos.' },
@@ -144,7 +144,7 @@ export default function ServicosPage() {
       {/* Pacotes */}
       <Section className="py-16 bg-white">
         <Container>
-          <h2 className="text-2xl font-bold mb-10"><span className="font-serif">Formatos</span></h2>
+          <h2 className="text-2xl font-bold mb-10"><span className="font-sans">Formatos</span></h2>
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
@@ -167,7 +167,7 @@ export default function ServicosPage() {
               }
             ].map(pkg => (
         <div key={pkg.nome} className="rounded-xl border border-zinc-200 p-6 bg-white flex flex-col">
-                <h3 className="font-semibold text-lg mb-2"><span className="font-serif">{pkg.nome}</span></h3>
+                <h3 className="font-semibold text-lg mb-2"><span className="font-sans">{pkg.nome}</span></h3>
                 <p className="text-sm text-zinc-700 leading-relaxed mb-4">{pkg.desc}</p>
                 <ul className="text-xs space-y-1 mb-4">
           {pkg.inclui.map((i: string) => <li key={i} className="pl-3 relative before:absolute before:left-0 before:top-2 before:h-1.5 before:w-1.5 before:rounded-full before:bg-zinc-900">{i}</li>)}
@@ -185,7 +185,7 @@ export default function ServicosPage() {
         <Container>
           <div className="grid md:grid-cols-2 gap-10 items-start">
             <div className="space-y-5">
-              <h2 className="text-2xl font-bold"><span className="font-serif">Por que comigo?</span></h2>
+              <h2 className="text-2xl font-bold"><span className="font-sans">Por que comigo?</span></h2>
               <ul className="space-y-3 text-sm leading-relaxed">
                 {[`+7 anos em confeitaria e panificação`, `Docência no Senac desde 2022`, `Foco em processos reproducíveis e margem`, `Experiência em salão, delivery e eventos`].map(p => <li key={p} className="pl-4 relative before:absolute before:left-0 before:top-2 before:h-1.5 before:w-1.5 before:rounded-full before:bg-zinc-900">{p}</li>)}
               </ul>
@@ -203,7 +203,7 @@ export default function ServicosPage() {
       {/* Depoimentos */}
       <Section className="py-16 bg-white">
         <Container>
-          <h2 className="text-2xl font-bold mb-10"><span className="font-serif">Depoimentos</span></h2>
+          <h2 className="text-2xl font-bold mb-10"><span className="font-sans">Depoimentos</span></h2>
           <Testimonials limit={3} />
         </Container>
       </Section>
@@ -211,7 +211,7 @@ export default function ServicosPage() {
       {/* FAQ */}
   <Section className="py-16">
         <Container>
-          <h2 className="text-2xl font-bold mb-8"><span className="font-serif">Perguntas frequentes</span></h2>
+          <h2 className="text-2xl font-bold mb-8"><span className="font-sans">Perguntas frequentes</span></h2>
           <div className="grid md:grid-cols-2 gap-8 text-sm">
     {faq.map(f => (
               <div key={f.q} className="rounded-lg border border-zinc-200 p-5 bg-white">
@@ -228,7 +228,7 @@ export default function ServicosPage() {
         <Container>
           <div className="rounded-2xl border border-zinc-200 p-10 md:p-14 bg-gradient-to-br from-brand/10 via-white to-white">
             <div className="max-w-2xl space-y-6">
-              <h2 className="text-3xl font-bold leading-tight"><span className="font-serif">Pronto para estruturar sua produção?</span></h2>
+              <h2 className="text-3xl font-bold leading-tight"><span className="font-sans">Pronto para estruturar sua produção?</span></h2>
               <p className="text-zinc-700">Agende um diagnóstico e receba clareza sobre próximos passos prioritários.</p>
               <div className="flex flex-wrap gap-4">
                 {finalCTA}
