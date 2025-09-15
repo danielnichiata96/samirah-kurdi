@@ -19,6 +19,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-space-grotesk)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         serif: ['var(--font-fraunces)', 'ui-serif', 'Georgia', 'serif'],
+  display: ['var(--font-pochaevsk, var(--font-fraunces))', 'Georgia', 'serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
