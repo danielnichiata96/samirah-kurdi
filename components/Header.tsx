@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import Container from './Container';
 import ActiveLink from './ActiveLink';
+import { SocialLink } from './SocialIcon';
+import { getSocialUrls } from '@/lib/config';
 
 export default function Header() {
+  const socials = getSocialUrls();
   return (
   <header className="sticky top-0 z-40 w-full border-b border-zinc-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <Container className="h-16 flex items-center justify-between gap-4">
@@ -17,6 +20,9 @@ export default function Header() {
           <ActiveLink href="/contato">Contato</ActiveLink>
         </nav>
         <div className="flex items-center gap-2">
+          <SocialLink href={socials.pinterest} network="pinterest" label="Pinterest" />
+          <SocialLink href={socials.tiktok} network="tiktok" label="TikTok" />
+          <SocialLink href={socials.instagram} network="instagram" label="Instagram" />
           <Link
             href="#agendar"
             className="hidden sm:inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors border border-zinc-300 hover:bg-zinc-100"

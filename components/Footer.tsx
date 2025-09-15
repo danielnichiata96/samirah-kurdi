@@ -1,8 +1,10 @@
 import Container from './Container';
 import Link from 'next/link';
-import { siteConfig, getInstagramHandle, getWhatsappLink } from '@/lib/config';
+import { siteConfig, getInstagramHandle, getWhatsappLink, getSocialUrls } from '@/lib/config';
+import { SocialLink } from './SocialIcon';
 
 export default function Footer() {
+  const socials = getSocialUrls();
   return (
   <footer className="border-t border-zinc-200 bg-white mt-16">
       <Container className="py-10 text-sm text-zinc-600">
@@ -23,9 +25,15 @@ export default function Footer() {
             )}
             <p className="text-zinc-500 pt-2">© {new Date().getFullYear()} {siteConfig.brand.name}</p>
           </div>
-          <nav className="flex gap-4">
+          <nav className="flex items-center gap-4">
             <Link href="/politica-de-privacidade">Política de Privacidade</Link>
             <Link href="/termos">Termos</Link>
+            <span className="mx-2 h-4 w-px bg-zinc-300 hidden md:inline-block" aria-hidden="true" />
+            <div className="flex items-center gap-2">
+              <SocialLink href={socials.pinterest} network="pinterest" label="Pinterest" />
+              <SocialLink href={socials.tiktok} network="tiktok" label="TikTok" />
+              <SocialLink href={socials.instagram} network="instagram" label="Instagram" />
+            </div>
           </nav>
         </div>
       </Container>

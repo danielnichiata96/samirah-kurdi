@@ -15,7 +15,9 @@ export const siteConfig = {
   contact: {
     whatsapp: str('CONTACT_WHATSAPP'), // formato livre: +55 11 9XXXX-XXXX
     email: str('CONTACT_EMAIL'),
-    instagram: str('SOCIAL_INSTAGRAM'),
+  instagram: str('SOCIAL_INSTAGRAM'),
+  tiktok: str('SOCIAL_TIKTOK'),
+  pinterest: str('SOCIAL_PINTEREST'),
   addressLine: str('CONTACT_ADDRESS_LINE'),
   city: str('CONTACT_ADDRESS_CITY'),
   region: str('CONTACT_ADDRESS_REGION'),
@@ -37,6 +39,14 @@ export function getInstagramHandle() {
   if (!raw) return { handle: '', url: '' };
   const clean = raw.replace(/^@+/, '');
   return { handle: `@${clean}`, url: `https://instagram.com/${clean}` };
+}
+
+export function getSocialUrls() {
+  const { instagram, tiktok, pinterest } = siteConfig.contact as any;
+  const ig = instagram ? `https://instagram.com/${instagram.replace(/^@+/, '')}` : '';
+  const tk = tiktok ? (tiktok.startsWith('http') ? tiktok : `https://www.tiktok.com/@${tiktok.replace(/^@+/, '')}`) : '';
+  const pt = pinterest ? (pinterest.startsWith('http') ? pinterest : `https://www.pinterest.com/${pinterest.replace(/^@+/, '')}`) : '';
+  return { instagram: ig, tiktok: tk, pinterest: pt };
 }
 
 export function getWhatsappLink() {
