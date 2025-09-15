@@ -1,6 +1,7 @@
 import Section from '@/components/Section';
 import Container from '@/components/Container';
 import Link from 'next/link';
+import Button from '@/components/Button';
 import type { Metadata } from 'next';
 import { siteConfig } from '@/lib/config';
 import Testimonials from '@/components/Testimonials';
@@ -19,15 +20,19 @@ export const metadata: Metadata = {
 export default function ServicosPage() {
   const calendly = process.env.CALENDLY_URL; // may be undefined or external
   const primaryCTA = calendly ? (
-    <a href={calendly} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-medium bg-brand text-white hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand">Agendar diagnóstico</a>
+    <a href={calendly} target="_blank" rel="noopener noreferrer">
+      <Button size="lg">Agendar diagnóstico</Button>
+    </a>
   ) : (
-    <Link href="/contato" className="inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-medium bg-brand text-white hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand">Agendar diagnóstico</Link>
+    <Link href="/contato" className="inline-flex">
+      <Button size="lg">Agendar diagnóstico</Button>
+    </Link>
   );
-  const pkgCTA = calendly ? (urlText?: string) => <a href={calendly} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium bg-brand text-white hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand">{urlText || 'Quero esse formato'}</a> : (urlText?: string) => <Link href="/contato" className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium bg-brand text-white hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand">{urlText || 'Quero esse formato'}</Link>;
+  const pkgCTA = calendly ? (urlText?: string) => <a href={calendly} target="_blank" rel="noopener noreferrer"><Button size="md">{urlText || 'Quero esse formato'}</Button></a> : (urlText?: string) => <Link href="/contato" className="inline-flex"><Button size="md">{urlText || 'Quero esse formato'}</Button></Link>;
   const finalCTA = calendly ? (
-    <a href={calendly} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-medium bg-brand text-white hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand">Agendar agora</a>
+    <a href={calendly} target="_blank" rel="noopener noreferrer"><Button size="lg">Agendar agora</Button></a>
   ) : (
-    <Link href="/contato" className="inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-medium bg-brand text-white hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand">Agendar agora</Link>
+    <Link href="/contato" className="inline-flex"><Button size="lg">Agendar agora</Button></Link>
   );
 
   const faq = [

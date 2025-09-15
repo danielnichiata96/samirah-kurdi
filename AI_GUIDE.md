@@ -198,3 +198,15 @@ Instruções no README.md com: como rodar local, como configurar env, e como pub
 5 prints de telas (gerados via next-sitemap não; apenas instruções de captura manual).
 
 Gere o código agora.
+
+Como manter no R$0–R$20/m (boas práticas)
+
+SSG: deixe o máximo de páginas pré-geradas (Home, Sobre, Serviços, E-books, Blog) – nada de SSR sem necessidade.
+
+Formulários sem servidor: use formulário hospedado (Brevo/Mailchimp embed, Formspree/Web3Forms/Basin) em vez de API Route.
+
+Imagens: comprima e sirva estático. Se precisar otimização dinâmica, considere Cloudinary/ImageKit (free tier) pra tirar carga da Vercel.
+
+Checkout externo: mantenha no Hotmart/Kiwify/Stripe Checkout (tira custo de infra e segurança).
+
+Logs/Jobs: nada de cron pesado em função – use automações externas (Zapier/Make) se precisar.

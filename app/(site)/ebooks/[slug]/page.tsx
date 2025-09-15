@@ -5,6 +5,7 @@ import ebooks from '@/content/ebooks.json';
 import { siteConfig } from '@/lib/config';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Button from '@/components/Button';
 
 type Ebook = typeof ebooks[number];
 
@@ -42,7 +43,7 @@ export default function EbookDetailPage({ params }: { params: { slug: string } }
   return (
     <>
       {/* Hero */}
-      <Section className="pt-12 pb-8">
+      <Section className="pt-12 pb-6">
         <Container>
           <div className="grid lg:grid-cols-2 gap-10 items-start">
             <div className="space-y-6 order-2 lg:order-1">
@@ -53,11 +54,8 @@ export default function EbookDetailPage({ params }: { params: { slug: string } }
                 <span className="text-2xl font-semibold">
                   {ebook.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                 </span>
-                <a
-                  href={checkoutUrl}
-                  className="inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-medium bg-brand text-white hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-                >
-                  Comprar agora
+                <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" className="inline-flex">
+                  <Button size="lg">Comprar agora</Button>
                 </a>
               </div>
               <p className="text-xs text-zinc-500">Download imediato • PDF • Atualizações menores incluídas</p>

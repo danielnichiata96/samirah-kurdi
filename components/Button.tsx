@@ -10,10 +10,11 @@ export default function Button({ className, variant = 'primary', size = 'md', ..
   const base = 'inline-flex items-center justify-center rounded-xl font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand disabled:opacity-50 disabled:pointer-events-none';
   
   const variants: Record<NonNullable<Props['variant']>, string> = {
-  primary: 'bg-zinc-900 text-white hover:bg-zinc-800',
+  /* Primary now matches the main home CTA: white, subtle border, offset shadow */
+  primary: 'bg-white border border-zinc-300 text-zinc-900 shadow-[0_6px_0_0_rgba(0,0,0,0.12)] hover:-translate-y-1 hover:shadow-[0_7px_0_0_rgba(0,0,0,0.12)]',
+  /* Accent becomes a slightly more subdued bordered button */
+  accent: 'bg-zinc-100 border border-zinc-200 text-zinc-900 hover:bg-zinc-50',
   secondary: 'bg-zinc-200 text-zinc-900 hover:bg-zinc-300',
-  /* "accent" segue o estilo da referência: botão branco com borda sutil e sombra deslocada */
-  accent: 'bg-white border border-zinc-300 text-zinc-900 shadow-[0_6px_0_0_rgba(0,0,0,0.12)] hover:translate-y-[-1px] hover:shadow-[0_7px_0_0_rgba(0,0,0,0.12)] active:translate-y-[1px] active:shadow-[0_5px_0_0_rgba(0,0,0,0.12)]',
   ghost: 'bg-transparent text-zinc-800 hover:bg-zinc-100',
   };
   

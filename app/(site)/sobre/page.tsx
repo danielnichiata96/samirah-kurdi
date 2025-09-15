@@ -6,6 +6,7 @@ import Section from '@/components/Section';
 import Container from '@/components/Container';
 import Prose from '@/components/Prose';
 import Link from 'next/link';
+import Button from '@/components/Button';
 import { getInstagramHandle, getWhatsappLink, siteConfig } from '@/lib/config';
 
 export const metadata: Metadata = {
@@ -180,11 +181,8 @@ export default function SobrePage() {
                 <p className="font-semibold">Pronto para padronizar e escalar sua confeitaria?</p>
                 <p className="text-sm text-zinc-600">Montamos um plano de ação sob medida.</p>
               </div>
-              <Link
-                href="/contato"
-                className="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand bg-brand text-white hover:opacity-90"
-              >
-                Agendar consultoria
+              <Link href="/contato" className="inline-flex">
+                <Button size="md">Agendar consultoria</Button>
               </Link>
             </div>
           </div>
