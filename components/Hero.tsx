@@ -34,7 +34,7 @@ export default async function Hero() {
               <div className="mt-6">
                 {latest ? (
                   <Link href={`/blog/${latest.slug}`} className="inline-flex">
-                    <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base shadow-[3px_3px_0_#D4D4D8]">
+                    <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base">
                       Leia já →
                     </Button>
                   </Link>
@@ -49,17 +49,17 @@ export default async function Hero() {
 
           {/* Coluna direita: Consultoria + E-book */}
           <div className="flex">
-            <div className="relative flex-1 rounded-2xl border border-zinc-200 bg-[color:var(--surface)] p-6 md:p-8 lg:p-10 shadow-sm">
+            <div className="relative flex-1 rounded-2xl ring-1 ring-black/5 bg-zinc-900 text-white p-6 md:p-8 lg:p-10">
               <h1 className="text-3xl md:text-4xl font-bold leading-tight">Consultoria e Aulas de Confeitaria Profissional</h1>
-              <p className="mt-3 text-zinc-700 md:text-lg max-w-prose">
+              <p className="mt-3 text-zinc-200 md:text-lg max-w-prose">
                 Ajudamos confeiteiros(as) a padronizar receitas, precificar e vender mais.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link href="/contato" className="inline-flex">
-                  <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base shadow-[3px_3px_0_#D4D4D8]">Agendar consultoria</Button>
+                  <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base">Agendar consultoria</Button>
                 </Link>
                 <Link href="/ebooks" className="inline-flex">
-                  <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base shadow-[3px_3px_0_#D4D4D8]">Comprar e-book</Button>
+                  <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base">Comprar e-book</Button>
                 </Link>
               </div>
             </div>
