@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Fraunces, Space_Grotesk } from 'next/font/google';
+import { Fraunces, Space_Grotesk, Bodoni_Moda } from 'next/font/google';
 import '@/styles/globals.css';
 import { getLocalBusinessJsonLd } from '@/lib/config';
 import { defaultMetadata } from '@/lib/seo';
@@ -18,11 +18,18 @@ const spaceGrotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
 });
 
+const bodoni = Bodoni_Moda({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-bodoni',
+});
+
 export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-  <html lang="pt-BR" className={`${fraunces.variable} ${spaceGrotesk.variable}`}>
+  <html lang="pt-BR" className={`${fraunces.variable} ${spaceGrotesk.variable} ${bodoni.variable}`}>
       <body className="font-sans antialiased text-zinc-900">
         {children}
         <script
