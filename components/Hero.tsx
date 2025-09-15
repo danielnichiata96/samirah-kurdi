@@ -33,15 +33,15 @@ export default async function Hero() {
               </h2>
               <div className="mt-6">
                 {latest ? (
-                  <Link href={`/blog/${latest.slug}`} className="inline-flex">
-                    <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base">
+                    <Link href={`/blog/${latest.slug}`} className="inline-flex">
+                    <Button variant="primary" size="lg" className="px-6 md:px-8 py-3 text-base">
                       Leia já →
                     </Button>
                   </Link>
                 ) : (
                   <Link href="/blog" className="inline-flex">
-                    <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base">Ver blog</Button>
-                  </Link>
+                      <Button variant="primary" size="lg" className="px-6 md:px-8 py-3 text-base">Ver blog</Button>
+                    </Link>
                 )}
               </div>
             </div>
@@ -59,10 +59,10 @@ export default async function Hero() {
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <Link href="/contato" className="inline-flex">
-                  <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base">Agendar consultoria</Button>
+                  <Button variant="primary" size="lg" className="px-6 md:px-8 py-3 text-base">Agendar consultoria</Button>
                 </Link>
                 <Link href="/ebooks" className="inline-flex">
-                  <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base">Comprar e-book</Button>
+                  <Button variant="primary" size="lg" className="px-6 md:px-8 py-3 text-base">Comprar e-book</Button>
                 </Link>
               </div>
             </div>
