@@ -41,7 +41,7 @@ export default function ContactForm() {
           type="text"
           value={form.nome}
           onChange={(e) => setForm({ ...form, nome: e.target.value })}
-          className="rounded-md border border-zinc-300 bg-white text-zinc-900 placeholder:text-zinc-500 dark:bg-zinc-900 dark:border-zinc-700 dark:text-zinc-100 dark:placeholder:text-zinc-400 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand"
+          className="rounded-md border border-zinc-300 bg-white text-zinc-900 placeholder:text-zinc-500 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand"
           required
         />
       </label>
@@ -51,7 +51,7 @@ export default function ContactForm() {
           type="email"
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
-          className="rounded-md border border-zinc-300 bg-white text-zinc-900 placeholder:text-zinc-500 dark:bg-zinc-900 dark:border-zinc-700 dark:text-zinc-100 dark:placeholder:text-zinc-400 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand"
+          className="rounded-md border border-zinc-300 bg-white text-zinc-900 placeholder:text-zinc-500 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand"
           required
         />
       </label>
@@ -60,7 +60,7 @@ export default function ContactForm() {
         <textarea
           value={form.mensagem}
           onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
-          className="rounded-md border border-zinc-300 bg-white text-zinc-900 placeholder:text-zinc-500 dark:bg-zinc-900 dark:border-zinc-700 dark:text-zinc-100 dark:placeholder:text-zinc-400 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand min-h-[120px]"
+          className="rounded-md border border-zinc-300 bg-white text-zinc-900 placeholder:text-zinc-500 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand min-h-[120px]"
           required
         />
       </label>
