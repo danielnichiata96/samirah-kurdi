@@ -49,9 +49,9 @@ export default async function Hero() {
 
           {/* Coluna direita: Consultoria + E-book */}
           <div className="flex">
-            <div className="relative flex-1 rounded-2xl ring-1 ring-black/5 bg-zinc-900 text-white p-6 md:p-8 lg:p-10">
-              <h1 className="text-3xl md:text-4xl font-bold leading-tight">Consultoria e Aulas de Confeitaria Profissional</h1>
-              <p className="mt-3 text-zinc-200 md:text-lg max-w-prose">
+            <div className="relative flex-1 rounded-2xl border border-zinc-200 bg-[color:var(--surface)] p-6 md:p-8 lg:p-10 shadow-sm">
+              <h1 className="text-3xl md:text-4xl font-bold leading-tight text-zinc-900">Consultoria e Aulas de Confeitaria Profissional</h1>
+              <p className="mt-3 text-zinc-700 md:text-lg max-w-prose">
                 Ajudamos confeiteiros(as) a padronizar receitas, precificar e vender mais.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
