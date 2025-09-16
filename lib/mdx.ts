@@ -24,6 +24,7 @@ export type Post = {
 };
 
 const BLOG_DIR = path.join(process.cwd(), 'content', 'blog');
+const RECIPES_DIR = path.join(process.cwd(), 'content', 'recipes');
 
 const FrontmatterSchema = z.object({
   title: z.string().min(3).max(120),
@@ -84,6 +85,53 @@ export async function getPost(slug: string, options: { includeDrafts?: boolean }
   const fm = validateFrontmatter(data, `${slug}.md`);
   if (fm.draft && !includeDrafts) return null;
   return { slug, frontmatter: fm, content };
+    } catch (_) {
+      return null;
+    }
+  }
+}
+
+// Recipes: separate loaders allowing recipes to live under content/recipes
+export async function getAllRecipes(options: { includeDrafts?: boolean } = {}): Promise<Post[]> {
+  const { includeDrafts = process.env.NODE_ENV !== 'production' } = options;
+  await fs.mkdir(RECIPES_DIR, { recursive: true });
+  const files = await fs.readdir(RECIPES_DIR);
+  const mdxFiles = files.filter((f) => f.endsWith('.md') || f.endsWith('.mdx'));
+  const posts = await Promise.all(
+    mdxFiles.map(async (file) => {
+      const raw = await fs.readFile(path.join(RECIPES_DIR, file), 'utf8');
+      const { data, content } = matter(raw);
+      const fm = validateFrontmatter(data, file);
+      const slug = file.replace(/\.(md|mdx)$/i, '');
+      return {
+        slug,
+        frontmatter: fm,
+        content,
+      };
+    })
+  );
+  return posts
+    .filter((p) => (includeDrafts ? true : !p.frontmatter.draft))
+    .sort((a, b) => (a.frontmatter.date < b.frontmatter.date ? 1 : -1));
+}
+
+export async function getRecipe(slug: string, options: { includeDrafts?: boolean } = {}): Promise<Post | null> {
+  const { includeDrafts = process.env.NODE_ENV !== 'production' } = options;
+  const filePath = path.join(RECIPES_DIR, `${slug}.mdx`);
+  try {
+    const raw = await fs.readFile(filePath, 'utf8');
+    const { data, content } = matter(raw);
+    const fm = validateFrontmatter(data, `${slug}.mdx`);
+    if (fm.draft && !includeDrafts) return null;
+    return { slug, frontmatter: fm, content };
+  } catch (e) {
+    const alt = path.join(RECIPES_DIR, `${slug}.md`);
+    try {
+      const raw = await fs.readFile(alt, 'utf8');
+      const { data, content } = matter(raw);
+      const fm = validateFrontmatter(data, `${slug}.md`);
+      if (fm.draft && !includeDrafts) return null;
+      return { slug, frontmatter: fm, content };
     } catch (_) {
       return null;
     }
