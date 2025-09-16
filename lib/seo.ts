@@ -12,6 +12,7 @@ export const defaultMetadata: Metadata = {
     type: 'website',
     locale: 'pt_BR',
     url: siteConfig.baseUrl,
+  siteName: siteConfig.brand.name,
     images: [
       {
         url: '/images/hero.svg',
@@ -64,7 +65,7 @@ export function buildMetadata(input: BuildMetaInput = {}): Metadata {
     alternates: { canonical: url },
     openGraph: {
       ...defaultMetadata.openGraph,
-      url,
+  url,
       title: title ? `${title} | ${siteConfig.brand.name}` : defaultMetadata.openGraph?.title,
       description: description || defaultMetadata.openGraph?.description,
       ...(imgUrl ? { images: [{ url: imgUrl }] } : {}),
@@ -119,6 +120,45 @@ export function buildArticleJsonLd(args: {
   if (tags.length) data.keywords = tags.join(', ');
   if (tags.length) data.articleSection = tags[0];
   if (wordCount) data.wordCount = wordCount;
+  return data;
+}
+
+// Gera JSON-LD para uma Receita.
+export function buildRecipeJsonLd(args: {
+  slug: string;
+  title: string;
+  description?: string;
+  date: string; // ISO
+  cover?: string;
+  tags?: string[];
+}) {
+  const { slug, title, description, date, cover, tags = [] } = args;
+  const url = new URL(`/receitas/${slug}`, siteConfig.baseUrl).toString();
+  const image = cover
+    ? [cover.startsWith('http') ? cover : new URL(cover, siteConfig.baseUrl).toString()]
+    : undefined;
+  const logoUrl = new URL('/images/avatar.svg', siteConfig.baseUrl).toString();
+  const data: Record<string, any> = {
+    '@context': 'https://schema.org',
+    '@type': 'Recipe',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    name: title,
+    headline: title,
+    description: description || siteConfig.brand.slogan,
+    datePublished: date,
+    author: { '@type': 'Organization', name: siteConfig.brand.name },
+    publisher: {
+      '@type': 'Organization',
+      name: siteConfig.brand.name,
+      logo: { '@type': 'ImageObject', url: logoUrl },
+    },
+    isAccessibleForFree: true,
+  };
+  if (image) data.image = image;
+  if (tags.length) {
+    data.keywords = tags.join(', ');
+    data.recipeCategory = tags[0];
+  }
   return data;
 }
 

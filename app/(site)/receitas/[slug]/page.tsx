@@ -1,10 +1,31 @@
-import { getRecipe } from '@/lib/mdx';
+import { getAllRecipes, getRecipe } from '@/lib/mdx';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import { renderMdx } from '@/lib/mdx';
 import React from 'react';
+import type { Metadata } from 'next';
+import { buildBreadcrumbJsonLd, buildMetadata, buildRecipeJsonLd } from '@/lib/seo';
 
 type Props = { params: { slug: string } };
+
+export async function generateStaticParams() {
+  const recipes = await getAllRecipes();
+  return recipes.map((r) => ({ slug: r.slug }));
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const post = await getRecipe(params.slug);
+  if (!post) return buildMetadata({ title: 'Receita não encontrada', path: `/receitas/${params.slug}` });
+  const { frontmatter } = post;
+  return buildMetadata({
+    title: frontmatter.title,
+    description: frontmatter.excerpt || frontmatter.title,
+    path: `/receitas/${post.slug}`,
+    image: frontmatter.cover || frontmatter.image,
+    publishedTime: frontmatter.date,
+    tags: frontmatter.tags,
+  });
+}
 
 export default async function ReceitaPage({ params }: Props) {
   const { slug } = params;
@@ -20,6 +41,19 @@ export default async function ReceitaPage({ params }: Props) {
   );
 
   const mdx = await renderMdx(post.content);
+  const recipeJsonLd = buildRecipeJsonLd({
+    slug: post.slug,
+    title: post.frontmatter.title,
+    description: post.frontmatter.excerpt,
+    date: post.frontmatter.date,
+    cover: post.frontmatter.cover || post.frontmatter.image,
+    tags: post.frontmatter.tags,
+  });
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: 'Início', path: '/' },
+    { name: 'Receitas', path: '/receitas' },
+    { name: post.frontmatter.title, path: `/receitas/${post.slug}` },
+  ]);
 
   return (
     <Section>
@@ -30,6 +64,14 @@ export default async function ReceitaPage({ params }: Props) {
           {/* @ts-ignore-next-line */}
           <div dangerouslySetInnerHTML={{ __html: mdx }} />
         </article>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(recipeJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        />
       </Container>
     </Section>
   );
