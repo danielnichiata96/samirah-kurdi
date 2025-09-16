@@ -4,7 +4,7 @@ import ebooks from '@/content/ebooks.json';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
-  const staticRoutes = ['', '/sobre', '/servicos', '/ebooks', '/blog', '/contato', '/blog/tags', '/receitas'].map((p) => ({
+  const staticRoutes = ['', '/sobre', '/servicos', '/ebooks', '/blog', '/contato', '/blog/tags', '/receitas', '/politica-de-privacidade', '/termos'].map((p) => ({
     url: `${base}${p || '/'}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,

@@ -48,6 +48,9 @@ export default function EbookDetailPage({ params }: { params: { slug: string } }
     image: ebook.capa,
     price: ebook.preco,
     url: checkoutUrl.startsWith('http') ? checkoutUrl : undefined,
+  brand: siteConfig.brand.name,
+  // Promoções giram anualmente por padrão; ajuste conforme necessário
+  priceValidUntil: new Date(new Date().getFullYear(), 11, 31).toISOString().slice(0, 10),
   });
   const breadcrumbJsonLd = buildBreadcrumbJsonLd([
     { name: 'Início', path: '/' },
