@@ -1,4 +1,4 @@
-import { getPost } from '@/lib/mdx';
+import { getRecipe } from '@/lib/mdx';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
 import { renderMdx } from '@/lib/mdx';
@@ -9,7 +9,7 @@ type Props = { params: { slug: string } };
 export default async function ReceitaPage({ params }: Props) {
   const { slug } = params;
   // For now reuse MDX loader used for blog (you can create separate recipes loader later)
-  const post = await getPost(slug as string, { includeDrafts: true });
+  const post = await getRecipe(slug as string, { includeDrafts: true });
   if (!post) return (
     <Section>
       <Container>
