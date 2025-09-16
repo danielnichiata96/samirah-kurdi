@@ -186,8 +186,10 @@ export function buildProductJsonLd(args: {
   price: number;
   currency?: string; // default BRL
   url?: string; // checkout or detail
+  priceValidUntil?: string; // ISO, optional
+  brand?: { name: string } | string; // optional
 }) {
-  const { slug, name, description, image, price, currency = 'BRL', url } = args;
+  const { slug, name, description, image, price, currency = 'BRL', url, priceValidUntil, brand } = args;
   const pageUrl = url || new URL(`/ebooks/${slug}`, siteConfig.baseUrl).toString();
   const img = image ? (image.startsWith('http') ? image : new URL(image, siteConfig.baseUrl).toString()) : undefined;
   const data: any = {
@@ -205,6 +207,8 @@ export function buildProductJsonLd(args: {
     },
   };
   if (img) data.image = [img];
+  if (priceValidUntil) data.offers.priceValidUntil = priceValidUntil;
+  if (brand) data.brand = typeof brand === 'string' ? { '@type': 'Brand', name: brand } : { '@type': 'Brand', ...(brand as any) };
   return data;
 }
 
