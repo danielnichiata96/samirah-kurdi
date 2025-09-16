@@ -15,7 +15,7 @@ export const defaultMetadata: Metadata = {
   siteName: siteConfig.brand.name,
     images: [
       {
-        url: '/images/hero.svg',
+  url: '/images/avatar.svg',
         width: 1200,
         height: 630,
         alt: siteConfig.brand.name,
@@ -175,5 +175,36 @@ export function buildBreadcrumbJsonLd(items: { name: string; path: string }[]) {
     '@type': 'BreadcrumbList',
     itemListElement,
   };
+}
+
+// JSON-LD para Product (e-book)
+export function buildProductJsonLd(args: {
+  slug: string;
+  name: string;
+  description?: string;
+  image?: string;
+  price: number;
+  currency?: string; // default BRL
+  url?: string; // checkout or detail
+}) {
+  const { slug, name, description, image, price, currency = 'BRL', url } = args;
+  const pageUrl = url || new URL(`/ebooks/${slug}`, siteConfig.baseUrl).toString();
+  const img = image ? (image.startsWith('http') ? image : new URL(image, siteConfig.baseUrl).toString()) : undefined;
+  const data: any = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name,
+    description: description || siteConfig.brand.slogan,
+    url: pageUrl,
+    offers: {
+      '@type': 'Offer',
+      price: price.toFixed(2),
+      priceCurrency: currency,
+      availability: 'https://schema.org/InStock',
+      url: pageUrl,
+    },
+  };
+  if (img) data.image = [img];
+  return data;
 }
 

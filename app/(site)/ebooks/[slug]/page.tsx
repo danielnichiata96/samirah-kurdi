@@ -6,6 +6,7 @@ import { siteConfig } from '@/lib/config';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Button from '@/components/Button';
+import { buildMetadata, buildBreadcrumbJsonLd, buildProductJsonLd } from '@/lib/seo';
 
 type Ebook = typeof ebooks[number];
 
@@ -15,14 +16,15 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const ebook = (ebooks as Ebook[]).find(e => e.slug === params.slug);
-  if (!ebook) return { title: 'E-book' };
+  if (!ebook) return buildMetadata({ title: 'E-book', path: `/ebooks/${params.slug}` });
   const title = `${ebook.titulo} — E-book`;
   const description = ebook.descricao;
-  return {
+  return buildMetadata({
     title,
     description,
-    openGraph: { title, description, type: 'article' },
-  };
+    path: `/ebooks/${ebook.slug}`,
+    image: ebook.capa,
+  });
 }
 
 export default function EbookDetailPage({ params }: { params: { slug: string } }) {
@@ -39,9 +41,22 @@ export default function EbookDetailPage({ params }: { params: { slug: string } }
   }
 
   const checkoutUrl = siteConfig.commerce.checkoutEbook || '/contato';
+  const productJsonLd = buildProductJsonLd({
+    slug: ebook.slug,
+    name: ebook.titulo,
+    description: ebook.descricao,
+    image: ebook.capa,
+    price: ebook.preco,
+    url: checkoutUrl.startsWith('http') ? checkoutUrl : undefined,
+  });
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: 'Início', path: '/' },
+    { name: 'E-books', path: '/ebooks' },
+    { name: ebook.titulo, path: `/ebooks/${ebook.slug}` },
+  ]);
 
   return (
-    <>
+  <>
       {/* Hero */}
       <Section className="pt-12 pb-6">
         <Container>
@@ -156,6 +171,9 @@ export default function EbookDetailPage({ params }: { params: { slug: string } }
           </div>
         </Container>
       </Section>
+
+  <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }} />
+  <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
     </>
   );
 }
