@@ -9,6 +9,8 @@ import type { Metadata } from 'next';
 
 const PER_PAGE = 10;
 
+// Revalidate paginated recipe pages every 6 hours
+export const revalidate = 21600;
 export async function generateStaticParams() {
   const recipes = await getAllRecipes();
   const totalPages = Math.ceil(recipes.length / PER_PAGE);
@@ -42,26 +44,30 @@ export default async function ReceitasPaginatedPage({ params }: { params: { page
     <Section>
       <Container>
         <h1 className="text-3xl font-bold mb-6">Receitas</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {pageItems.map((e) => (
-            <Link key={e.slug} href={`/receitas/${e.slug}`} className="block overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm">
-              <div className="relative w-full h-44">
-                <Image
-                  src={e.image}
-                  alt={e.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  placeholder="blur"
-                  blurDataURL={placeholderBlurDataURL}
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="text-lg font-semibold">{e.title}</h3>
-              </div>
-            </Link>
-          ))}
-        </div>
+        {pageItems.length === 0 ? (
+          <p className="text-zinc-600 mt-6">Nenhuma receita nesta página.</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {pageItems.map((e) => (
+              <Link key={e.slug} href={`/receitas/${e.slug}`} className="block overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm">
+                <div className="relative w-full h-44">
+                  <Image
+                    src={e.image}
+                    alt={e.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    placeholder="blur"
+                    blurDataURL={placeholderBlurDataURL}
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold">{e.title}</h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
         <nav aria-label="Paginação" className="mt-10 flex items-center justify-between text-sm">
           <div className="flex gap-2 items-center text-zinc-500">Página {pageNum} de {totalPages}</div>
           <div className="flex gap-2">

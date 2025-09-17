@@ -9,6 +9,9 @@ import type { Metadata } from 'next';
 import { buildMetadata, buildArticleJsonLd, buildBreadcrumbJsonLd } from '@/lib/seo';
 import { getAllPosts } from '@/lib/mdx';
 
+// Revalidate blog post pages daily
+export const revalidate = 86400;
+
 export async function generateStaticParams() {
   const posts = await getAllPosts();
   return posts.map((p) => ({ slug: p.slug }));

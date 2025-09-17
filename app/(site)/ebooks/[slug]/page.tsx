@@ -10,6 +10,9 @@ import { buildMetadata, buildBreadcrumbJsonLd, buildProductJsonLd } from '@/lib/
 
 type Ebook = typeof ebooks[number];
 
+// Revalidate ebook detail pages daily
+export const revalidate = 86400;
+
 export function generateStaticParams() {
   return (ebooks as Ebook[]).map(e => ({ slug: e.slug }));
 }

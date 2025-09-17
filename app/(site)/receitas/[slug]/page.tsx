@@ -8,6 +8,9 @@ import { buildBreadcrumbJsonLd, buildMetadata, buildRecipeJsonLd } from '@/lib/s
 
 type Props = { params: { slug: string } };
 
+// Revalidate recipe detail pages daily
+export const revalidate = 86400;
+
 export async function generateStaticParams() {
   const recipes = await getAllRecipes();
   return recipes.map((r) => ({ slug: r.slug }));

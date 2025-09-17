@@ -4,6 +4,9 @@ import EbookCard from '@/components/EbookCard';
 import ebooks from '@/content/ebooks.json';
 import { siteConfig } from '@/lib/config';
 
+// Revalidate ebooks listing daily
+export const revalidate = 86400;
+
 export default function EbooksPage() {
   const checkout = siteConfig.commerce.checkoutEbook;
   return (

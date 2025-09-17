@@ -11,6 +11,9 @@ export const metadata = {
   path: '/receitas',
 };
 
+// Revalidate the recipes listing every 6 hours
+export const revalidate = 21600;
+
 const PER_PAGE = 10;
 
 export default async function ReceitasIndex() {
@@ -28,26 +31,30 @@ export default async function ReceitasIndex() {
       <Container>
         <h1 className="text-3xl font-bold mb-6">Receitas</h1>
         <p className="text-zinc-700 max-w-2xl">Página de receitas em formato visual — listas de ingredientes, passo a passo e notas. Cada card leva para a receita completa.</p>
-  <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {items.map((e) => (
-            <Link key={e.slug} href={`/receitas/${e.slug}`} className="block overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm">
-              <div className="relative w-full h-44">
-                <Image
-                  src={e.image}
-                  alt={e.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  placeholder="blur"
-                  blurDataURL={placeholderBlurDataURL}
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="text-lg font-semibold">{e.title}</h3>
-              </div>
-            </Link>
-          ))}
-        </div>
+        {items.length === 0 ? (
+          <p className="text-zinc-600 mt-6">Receitas em breve.</p>
+        ) : (
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {items.map((e) => (
+              <Link key={e.slug} href={`/receitas/${e.slug}`} className="block overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm">
+                <div className="relative w-full h-44">
+                  <Image
+                    src={e.image}
+                    alt={e.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    placeholder="blur"
+                    blurDataURL={placeholderBlurDataURL}
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold">{e.title}</h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
         {totalPages > 1 && (
           <nav aria-label="Paginação" className="mt-10 flex items-center justify-between text-sm">
             <span className="text-zinc-500">Página 1 de {totalPages}</span>

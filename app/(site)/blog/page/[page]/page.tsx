@@ -7,6 +7,8 @@ import type { Metadata } from 'next';
 
 const PER_PAGE = 10;
 
+// Revalidate paginated blog pages every hour
+export const revalidate = 3600;
 export async function generateStaticParams() {
   const posts = await getAllPosts();
   const totalPages = Math.ceil(posts.length / PER_PAGE);

@@ -3,11 +3,8 @@ import path from 'path';
 
 const nextConfig = {
   reactStrictMode: true,
-  images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: '**' }
-    ]
-  },
+  // No remote image hosts are used. Tighten policy by removing wildcard allowance.
+  images: {},
   experimental: {
     typedRoutes: true
   },
