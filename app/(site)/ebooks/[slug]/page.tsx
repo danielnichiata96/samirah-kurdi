@@ -82,7 +82,14 @@ export default function EbookDetailPage({ params }: { params: { slug: string } }
               <p className="text-xs text-zinc-500">Download imediato • PDF • Atualizações menores incluídas</p>
             </div>
             <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl ring-1 ring-black/5 order-1 lg:order-2 bg-white">
-              <Image src={ebook.capa} alt={ebook.titulo} fill className="object-cover" />
+              <Image
+                src={ebook.capa}
+                alt={ebook.titulo}
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 1024px) 100vw, 640px"
+              />
             </div>
           </div>
         </Container>

@@ -67,7 +67,14 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             </p>
             {post.frontmatter.cover && (
               <div className="relative mt-6 aspect-[16/9] w-full overflow-hidden rounded-lg ring-1 ring-black/5">
-                <Image src={post.frontmatter.cover} alt={post.frontmatter.title} fill className="object-cover" />
+                <Image
+                  src={post.frontmatter.cover}
+                  alt={post.frontmatter.title}
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 960px"
+                />
               </div>
             )}
           </header>

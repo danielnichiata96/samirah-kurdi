@@ -25,6 +25,10 @@ export const metadata: Metadata = defaultMetadata;
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
   <html lang="pt-BR" className={`${spaceGrotesk.variable} ${bodoni.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className="font-sans antialiased text-zinc-900">
         {children}
         <script

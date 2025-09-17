@@ -1,0 +1,5 @@
+{
+  "http://localhost:3000/": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1758117009950-31722.report.html",
+  "http://localhost:3000/blog/primeiro-post": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1758117011048-95180.report.html",
+  "http://localhost:3000/ebooks/brigadeiros-profissionais": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1758117012149-89429.report.html"
+}
