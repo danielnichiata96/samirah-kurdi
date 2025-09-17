@@ -52,15 +52,36 @@ export async function POST(req: Request) {
       });
 
       const from = process.env.SMTP_FROM || process.env.CONTACT_EMAIL || 'no-reply@example.com';
-      // Você pode optar por enviar um email de confirmação para o usuário
-      // e/ou uma notificação interna para você. Aqui, enviamos notificação interna.
-      const info = await transporter.sendMail({
-        from,
-        to: process.env.CONTACT_EMAIL || from,
-        subject: 'Novo cadastro na newsletter',
-        text: `Email: ${email}`,
-      });
-      console.log('[newsletter] SMTP enviado:', info.messageId);
+
+      // 1) Confirmação para o assinante
+      try {
+        const confirmInfo = await transporter.sendMail({
+          from,
+          to: email,
+          subject: 'Confirmação de inscrição – Newsletter',
+          text:
+            'Obrigado por se inscrever! Você passará a receber novidades da Samirah. Se não foi você, ignore este e-mail.',
+          html:
+            '<p>Obrigado por se inscrever! 🎉</p><p>Você passará a receber novidades da <strong>Samirah</strong>. Se não foi você, ignore este e-mail.</p>',
+          replyTo: process.env.CONTACT_EMAIL || from,
+        });
+        console.log('[newsletter] SMTP confirm sent:', confirmInfo.messageId);
+      } catch (e) {
+        console.warn('[newsletter] Falha ao enviar confirmação ao assinante:', e);
+      }
+
+      // 2) Notificação interna
+      try {
+        const notifyInfo = await transporter.sendMail({
+          from,
+          to: process.env.CONTACT_EMAIL || from,
+          subject: 'Novo cadastro na newsletter',
+          text: `Email: ${email}`,
+        });
+        console.log('[newsletter] SMTP internal sent:', notifyInfo.messageId);
+      } catch (e) {
+        console.warn('[newsletter] Falha ao enviar notificação interna:', e);
+      }
     } else if (process.env.NEWSLETTER_API_KEY) {
       // Placeholder para integração direta via API (Mailchimp/Brevo HTTP)
       console.log('[newsletter] API externa (placeholder):', email);
