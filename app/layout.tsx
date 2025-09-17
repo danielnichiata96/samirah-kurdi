@@ -16,6 +16,8 @@ const bodoni = Bodoni_Moda({
   weight: ['400', '500', '600', '700'],
   display: 'swap',
   variable: '--font-bodoni',
+  fallback: ['Georgia', 'Times New Roman', 'Times', 'serif'],
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = defaultMetadata;
