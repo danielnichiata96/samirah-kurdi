@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildMetadata, buildArticleJsonLd, buildRecipeJsonLd } from '@/lib/seo';
+import { buildMetadata, buildArticleJsonLd, buildRecipeJsonLd, buildProductJsonLd } from '@/lib/seo';
 
 describe('lib/seo', () => {
   it('buildMetadata returns title/description', () => {
@@ -19,5 +19,15 @@ describe('lib/seo', () => {
     const json = buildRecipeJsonLd({ slug: 'bolo', title: 'Bolo', date: '2024-01-01' });
     expect(json['@type']).toBe('Recipe');
     expect(json.name).toBe('Bolo');
+  });
+
+  it('buildProductJsonLd omits offers.url without external url', () => {
+    const json: any = buildProductJsonLd({
+      slug: 'brigadeiros-profissionais',
+      name: 'Brigadeiros Profissionais',
+      price: 49.9,
+    });
+    expect(json.offers).toBeTruthy();
+    expect(json.offers.url).toBeUndefined();
   });
 });

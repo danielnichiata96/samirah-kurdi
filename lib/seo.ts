@@ -190,7 +190,7 @@ export function buildProductJsonLd(args: {
   brand?: { name: string } | string; // optional
 }) {
   const { slug, name, description, image, price, currency = 'BRL', url, priceValidUntil, brand } = args;
-  const pageUrl = url || new URL(`/ebooks/${slug}`, siteConfig.baseUrl).toString();
+  const pageUrl = new URL(`/ebooks/${slug}`, siteConfig.baseUrl).toString();
   const img = image ? (image.startsWith('http') ? image : new URL(image, siteConfig.baseUrl).toString()) : undefined;
   const data: any = {
     '@context': 'https://schema.org',
@@ -203,9 +203,12 @@ export function buildProductJsonLd(args: {
       price: price.toFixed(2),
       priceCurrency: currency,
       availability: 'https://schema.org/InStock',
-      url: pageUrl,
     },
   };
+  // Only set offers.url when we explicitly receive an external checkout URL
+  if (url) {
+    data.offers.url = url;
+  }
   if (img) data.image = [img];
   if (priceValidUntil) data.offers.priceValidUntil = priceValidUntil;
   if (brand) data.brand = typeof brand === 'string' ? { '@type': 'Brand', name: brand } : { '@type': 'Brand', ...(brand as any) };

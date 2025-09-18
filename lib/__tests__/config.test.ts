@@ -40,4 +40,15 @@ describe('lib/config', () => {
     const urls = getSocialUrls();
     expect(urls.instagram).toContain('instagram.com');
   });
+
+  it('getSocialUrls normalizes @ and builds urls', async () => {
+    const mod = await loadConfig();
+    mod.siteConfig.contact.instagram = '@samirah.kurdi' as any;
+    mod.siteConfig.contact.tiktok = '@samirah' as any;
+    mod.siteConfig.contact.pinterest = 'samirahpins' as any;
+    const urls = mod.getSocialUrls();
+    expect(urls.instagram).toBe('https://instagram.com/samirah.kurdi');
+    expect(urls.tiktok).toBe('https://www.tiktok.com/@samirah');
+    expect(urls.pinterest).toBe('https://www.pinterest.com/samirahpins');
+  });
 });

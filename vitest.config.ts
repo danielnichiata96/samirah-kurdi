@@ -11,7 +11,18 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
-      exclude: ['**/*.test.*', 'next.config.*', 'postcss.config.*', 'tailwind.config.*', 'scripts/**'],
+      // Avoid attempting to read source maps from Next.js vendor chunks and node_modules
+      exclude: [
+        '**/*.test.*',
+        'next.config.*',
+        'postcss.config.*',
+        'tailwind.config.*',
+        'scripts/**',
+        '**/node_modules/**',
+        '**/.next/**',
+        '.next/**',
+        '**/vendor-chunks/**',
+      ],
     },
   },
   resolve: {
