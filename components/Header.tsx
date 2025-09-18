@@ -22,6 +22,8 @@ export default function Header() {
           <ActiveLink href="/contato">Contato</ActiveLink>
         </nav>
         <div className="flex items-center gap-2">
+          {/* WhatsApp placeholder (disabled) */}
+          <SocialLink network="whatsapp" label="WhatsApp" />
           <SocialLink href={socials.pinterest} network="pinterest" label="Pinterest" />
           <SocialLink href={socials.tiktok} network="tiktok" label="TikTok" />
           <SocialLink href={socials.instagram} network="instagram" label="Instagram" />

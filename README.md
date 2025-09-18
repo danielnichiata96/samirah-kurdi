@@ -43,6 +43,14 @@ Veja `.env.example` e crie um `.env.local` com os valores.
 ## Deploy
 Recomendado Vercel. Após importar o repositório, configure as variáveis de ambiente do `.env.example`.
 
+### Hotmart (Checkout)
+Para ativar o botão Comprar:
+- Pegue o link de checkout do seu produto na Hotmart.
+- Defina `CHECKOUT_EBOOK_URL` no `.env.local` ou use `checkoutUrl` por e-book em `content/ebooks.json`.
+- Opcional: defina a URL de redirecionamento pós-compra em Hotmart para `/ebooks/sucesso`.
+
+UTM passthrough: o componente `CheckoutButton` anexa parâmetros `utm_*` da URL atual ao link de checkout.
+
 ## Blog (MDX)
 Os posts ficam em `content/blog/` e usam arquivos `.mdx` ou `.md` com *frontmatter*.
 

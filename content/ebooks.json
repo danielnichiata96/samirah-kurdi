@@ -4,12 +4,13 @@
     "titulo": "Brigadeiros Profissionais",
     "descricao": "Técnicas, padronização e rendimento para vender.",
     "preco": 49.9,
-    "capa": "/images/ebook.svg",
+  "capa": "/images/ebook.svg",
+  "checkoutUrl": "",
     "beneficios": [
-      "Padronize lotes e ganhe consistência",
-      "Estruture fichas técnicas completas",
-      "Calcule custos e margem de forma simples",
-      "Otimize mise en place para escala"
+      "Padronizar lotes e ganhar consistência",
+      "Estruturar fichas técnicas completas",
+      "Calcular custos e margem de forma simples",
+      "Otimizar mise en place para escala"
     ],
     "publico": [
       "Confeiteiros(as) iniciantes que querem profissionalizar produção",

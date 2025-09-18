@@ -25,6 +25,7 @@ export const siteConfig = {
   country: str('CONTACT_ADDRESS_COUNTRY', 'BR'),
   latitude: str('CONTACT_LATITUDE'),
   longitude: str('CONTACT_LONGITUDE'),
+  exposeFullAddress: str('CONTACT_EXPOSE_FULL_ADDRESS', 'false') === 'true',
   },
   commerce: {
     checkoutEbook: str('CHECKOUT_EBOOK_URL'),
@@ -69,15 +70,23 @@ export function getLocalBusinessJsonLd() {
   };
   if (contact.email) data.email = contact.email;
   if (contact.whatsapp) data.telephone = contact.whatsapp;
-  if (addrPresent) {
-    data.address = {
-      '@type': 'PostalAddress',
-      streetAddress: contact.addressLine,
-      addressLocality: contact.city,
-      addressRegion: contact.region,
-      postalCode: contact.postalCode,
-      addressCountry: contact.country || 'BR'
-    };
+  if (contact.city || contact.region) {
+    // Only include city/region unless explicitly allowed to expose full address
+    data.address = contact.exposeFullAddress && addrPresent
+      ? {
+          '@type': 'PostalAddress',
+          streetAddress: contact.addressLine,
+          addressLocality: contact.city,
+          addressRegion: contact.region,
+          postalCode: contact.postalCode,
+          addressCountry: contact.country || 'BR'
+        }
+      : {
+          '@type': 'PostalAddress',
+          addressLocality: contact.city,
+          addressRegion: contact.region,
+          addressCountry: contact.country || 'BR'
+        };
   }
   if (geoPresent) {
     data.geo = { '@type': 'GeoCoordinates', latitude: contact.latitude, longitude: contact.longitude };

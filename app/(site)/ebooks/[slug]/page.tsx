@@ -6,6 +6,7 @@ import { siteConfig } from '@/lib/config';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Button from '@/components/Button';
+import CheckoutButton from '@/components/CheckoutButton';
 import { buildMetadata, buildBreadcrumbJsonLd, buildProductJsonLd } from '@/lib/seo';
 
 type Ebook = typeof ebooks[number];
@@ -43,14 +44,14 @@ export default function EbookDetailPage({ params }: { params: { slug: string } }
     );
   }
 
-  const checkoutUrl = siteConfig.commerce.checkoutEbook || '/contato';
+  const checkoutUrl = (ebook as any).checkoutUrl || siteConfig.commerce.checkoutEbook || '';
   const productJsonLd = buildProductJsonLd({
     slug: ebook.slug,
     name: ebook.titulo,
     description: ebook.descricao,
     image: ebook.capa,
     price: ebook.preco,
-    url: checkoutUrl.startsWith('http') ? checkoutUrl : undefined,
+    url: checkoutUrl && checkoutUrl.startsWith('http') ? checkoutUrl : undefined,
   brand: siteConfig.brand.name,
   // Promoções giram anualmente por padrão; ajuste conforme necessário
   priceValidUntil: new Date(new Date().getFullYear(), 11, 31).toISOString().slice(0, 10),
@@ -75,9 +76,15 @@ export default function EbookDetailPage({ params }: { params: { slug: string } }
                 <span className="text-2xl font-semibold">
                   {ebook.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                 </span>
-                <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" className="inline-flex">
-                  <Button size="lg">Comprar agora</Button>
-                </a>
+                {checkoutUrl ? (
+                  <CheckoutButton href={checkoutUrl} className="inline-flex">
+                    <Button size="lg">Comprar agora</Button>
+                  </CheckoutButton>
+                ) : (
+                  <Link href="/contato" className="inline-flex">
+                    <Button size="lg" variant="secondary">Avise-me</Button>
+                  </Link>
+                )}
               </div>
               <p className="text-xs text-zinc-500">Download imediato • PDF • Atualizações menores incluídas</p>
             </div>
@@ -95,11 +102,11 @@ export default function EbookDetailPage({ params }: { params: { slug: string } }
         </Container>
       </Section>
 
-      {/* Benefícios */}
+  {/* O que você vai aprender */}
       {ebook.beneficios && (
         <Section className="py-12 bg-[color:var(--surface)]/60">
           <Container>
-            <h2 className="text-2xl font-bold mb-6"><span className="font-sans">O que você ganha</span></h2>
+    <h2 className="text-2xl font-bold mb-6"><span className="font-sans">O que você vai aprender</span></h2>
             <ul className="grid sm:grid-cols-2 gap-4">
               {ebook.beneficios.map((b: string) => (
                 <li key={b} className="rounded-lg border border-zinc-200 bg-white p-4 text-sm leading-relaxed">
@@ -124,9 +131,9 @@ export default function EbookDetailPage({ params }: { params: { slug: string } }
                   </ul>
                 </div>
               )}
-              {ebook.naoIndicado && (
+        {ebook.naoIndicado && (
                 <div>
-                  <h3 className="text-xl font-semibold mb-4">Não indicado se</h3>
+          <h3 className="text-xl font-semibold mb-4">Não é para você se</h3>
                   <ul className="space-y-2 text-sm">
                     {ebook.naoIndicado.map((n: string) => <li key={n} className="pl-4 relative before:absolute before:left-0 before:top-2 before:h-1.5 before:w-1.5 before:rounded-full before:bg-zinc-400">{n}</li>)}
                   </ul>
@@ -173,12 +180,21 @@ export default function EbookDetailPage({ params }: { params: { slug: string } }
             <div className="max-w-2xl space-y-6">
               <h2 className="text-3xl font-bold leading-tight"><span className="font-sans">Pronto para padronizar seus brigadeiros?</span></h2>
               <p className="text-zinc-700 text-base">Garanta acesso imediato e comece hoje a produzir com consistência e margem clara.</p>
-              <a
-                href={checkoutUrl}
-                className="inline-flex items-center justify-center rounded-md px-8 py-4 text-base font-medium bg-brand text-white hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-              >
-                Comprar agora
-              </a>
+              {checkoutUrl ? (
+                <CheckoutButton
+                  href={checkoutUrl}
+                  className="inline-flex items-center justify-center rounded-md px-8 py-4 text-base font-medium bg-brand text-white hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                >
+                  Comprar agora
+                </CheckoutButton>
+              ) : (
+                <Link
+                  href="/contato"
+                  className="inline-flex items-center justify-center rounded-md px-8 py-4 text-base font-medium bg-zinc-900 text-white hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900"
+                >
+                  Avise-me do lançamento
+                </Link>
+              )}
               <p className="text-xs text-zinc-500">Precisa de algo mais avançado? <Link href="/contato" className="text-brand hover:underline">Fale sobre consultoria →</Link></p>
             </div>
           </div>

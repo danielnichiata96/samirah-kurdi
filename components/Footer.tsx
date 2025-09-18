@@ -10,9 +10,13 @@ export default function Footer() {
       <Container className="py-10 text-sm text-zinc-600">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-1 max-w-xs">
-            <p className="font-medium text-zinc-700">{siteConfig.brand.name}</p>
-            {siteConfig.contact.addressLine && (
-              <p className="not-italic">{siteConfig.contact.addressLine}{siteConfig.contact.city ? `, ${siteConfig.contact.city}` : ''}</p>
+            <Link href="/" className="font-bold text-lg">
+              <span className="font-display tracking-wide uppercase">SAMIRAH KURDI</span>
+            </Link>
+            {(siteConfig.contact.city || siteConfig.contact.region) && (
+              <p className="not-italic">
+                {[siteConfig.contact.city, siteConfig.contact.region].filter(Boolean).join(', ')}
+              </p>
             )}
             {siteConfig.contact.email && (
               <p><a href={`mailto:${siteConfig.contact.email}`} className="hover:underline">{siteConfig.contact.email}</a></p>
@@ -30,6 +34,8 @@ export default function Footer() {
             <Link href="/termos">Termos</Link>
             <span className="mx-2 h-4 w-px bg-zinc-300 hidden md:inline-block" aria-hidden="true" />
             <div className="flex items-center gap-2">
+              {/* WhatsApp placeholder (disabled) */}
+              <SocialLink network="whatsapp" label="WhatsApp" />
               <SocialLink href={socials.pinterest} network="pinterest" label="Pinterest" />
               <SocialLink href={socials.tiktok} network="tiktok" label="TikTok" />
               <SocialLink href={socials.instagram} network="instagram" label="Instagram" />

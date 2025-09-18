@@ -37,7 +37,7 @@ export default async function ReceitasPaginatedPage({ params }: { params: { page
   const pageItems = recipes.slice(start, start + PER_PAGE).map((r) => ({
     slug: r.slug,
     title: r.frontmatter.title,
-    image: r.frontmatter.cover ?? r.frontmatter.image ?? '/images/placeholder-article.jpg',
+  image: r.frontmatter.cover ?? r.frontmatter.image ?? '/images/placeholder-ebook.png',
   }));
 
   return (

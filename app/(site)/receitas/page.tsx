@@ -23,7 +23,7 @@ export default async function ReceitasIndex() {
   const items = slice.map(r => ({
     slug: r.slug,
     title: r.frontmatter.title,
-    image: r.frontmatter.cover ?? r.frontmatter.image ?? '/images/placeholder-article.jpg'
+  image: r.frontmatter.cover ?? r.frontmatter.image ?? '/images/placeholder-ebook.png'
   }));
 
   return (

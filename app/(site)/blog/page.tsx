@@ -38,7 +38,7 @@ export default async function BlogPage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {pagePosts.map((p) => {
-              const imgSrc = p.frontmatter.cover ?? p.frontmatter.image ?? '/images/placeholder-article.jpg';
+              const imgSrc = p.frontmatter.cover ?? p.frontmatter.image ?? '/images/placeholder-ebook.png';
               return (
                 <article key={p.slug} className="group">
                   <Link href={`/blog/${p.slug}`} className="block">
