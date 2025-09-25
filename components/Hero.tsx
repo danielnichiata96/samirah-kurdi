@@ -34,13 +34,13 @@ export default async function Hero() {
               <div className="mt-6">
                 {latest ? (
                     <Link href={`/blog/${latest.slug}`} className="inline-flex">
-                    <Button variant="primary" size="lg" className="px-6 md:px-8 py-3 text-base">
+                    <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base rounded-full">
                       Leia já →
                     </Button>
                   </Link>
                 ) : (
                   <Link href="/blog" className="inline-flex">
-                      <Button variant="primary" size="lg" className="px-6 md:px-8 py-3 text-base">Ver blog</Button>
+                      <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base rounded-full">Ver blog</Button>
                     </Link>
                 )}
               </div>
@@ -50,19 +50,19 @@ export default async function Hero() {
           {/* Coluna direita: Consultoria + E-book */}
           <div className="flex">
             <div className="relative flex-1 rounded-2xl border border-zinc-200 bg-[color:var(--panel)] p-8 md:p-10 lg:p-12 shadow-[0_6px_0_0_rgba(0,0,0,0.08)]">
-              <h1 className="text-center text-4xl md:text-5xl font-semibold leading-snug text-zinc-900 font-display">
+              <h1 className="text-center text-4xl md:text-5xl font-semibold leading-snug text-zinc-900 font-poppins">
                 Consultoria e Aulas de
                 <br className="hidden md:block" /> Confeitaria Profissional
               </h1>
-              <p className="mt-4 text-center text-zinc-700 md:text-lg max-w-2xl mx-auto">
+              <p className="mt-4 text-center text-zinc-700 md:text-lg max-w-prose mx-auto">
                 Ajudamos confeiteiros(as) a padronizar receitas, precificar e vender mais.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <Link href="/contato" className="inline-flex">
-                  <Button variant="primary" size="lg" className="px-6 md:px-8 py-3 text-base">Agendar consultoria</Button>
+                  <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base rounded-full">Agendar consultoria</Button>
                 </Link>
                 <Link href="/ebooks" className="inline-flex">
-                  <Button variant="primary" size="lg" className="px-6 md:px-8 py-3 text-base">Comprar e-book</Button>
+                  <Button variant="accent" size="lg" className="px-6 md:px-8 py-3 text-base rounded-full">Comprar e-book</Button>
                 </Link>
               </div>
             </div>

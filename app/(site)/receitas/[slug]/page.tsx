@@ -1,10 +1,14 @@
 import { getAllRecipes, getRecipe } from '@/lib/mdx';
 import Container from '@/components/Container';
 import Section from '@/components/Section';
-import { renderMdx } from '@/lib/mdx';
 import React from 'react';
 import type { Metadata } from 'next';
 import { buildBreadcrumbJsonLd, buildMetadata, buildRecipeJsonLd } from '@/lib/seo';
+import Prose from '@/components/Prose';
+import JumpToRecipe from '@/components/JumpToRecipe';
+import RecipeCard from '@/components/RecipeCard';
+import { MDXRemote } from 'next-mdx-remote/rsc';
+import RecipeHeader from '@/components/RecipeHeader';
 
 type Props = { params: { slug: string } };
 
@@ -43,7 +47,6 @@ export default async function ReceitaPage({ params }: Props) {
     </Section>
   );
 
-  const mdx = await renderMdx(post.content);
   const recipeJsonLd = buildRecipeJsonLd({
     slug: post.slug,
     title: post.frontmatter.title,
@@ -59,22 +62,46 @@ export default async function ReceitaPage({ params }: Props) {
   ]);
 
   return (
-    <Section>
+    <Section className="pb-16">
       <Container>
-        <h1 className="text-3xl font-bold mb-4">{post.frontmatter.title}</h1>
-        <div className="text-zinc-700 mb-6">{post.frontmatter.excerpt}</div>
-        <article className="prose max-w-none">
-          {/* @ts-ignore-next-line */}
-          <div dangerouslySetInnerHTML={{ __html: mdx }} />
-        </article>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(recipeJsonLd) }}
+        {/* Header */}
+        <RecipeHeader
+          title={post.frontmatter.title}
+          excerpt={post.frontmatter.excerpt}
+          date={post.frontmatter.date}
+          cover={post.frontmatter.cover || post.frontmatter.image}
+          category={post.frontmatter.category || post.frontmatter.tags?.[0]}
+          rating={post.frontmatter.rating}
+          reviews={post.frontmatter.reviews}
+          prepTime={post.frontmatter.prepTime}
+          cookTime={post.frontmatter.cookTime}
+          totalTime={post.frontmatter.totalTime}
+          className="mt-2"
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-        />
+
+        {/* Content + Recipe card */}
+        <div className="mx-auto mt-10 grid max-w-5xl gap-10 lg:grid-cols-[1fr_minmax(320px,420px)]">
+          <Prose className="min-w-0">
+            {/* Server-rendered MDX content */}
+            <MDXRemote source={post.content} />
+          </Prose>
+
+          <aside className="lg:sticky lg:top-28 h-fit">
+            <RecipeCard
+              title="Resumo da receita"
+              prepTime={post.frontmatter.prepTime}
+              cookTime={post.frontmatter.cookTime}
+              totalTime={post.frontmatter.totalTime}
+              servings={post.frontmatter.servings}
+              yieldText={post.frontmatter.yield}
+              ingredients={post.frontmatter.ingredients}
+              instructions={post.frontmatter.instructions}
+            />
+          </aside>
+        </div>
+
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(recipeJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       </Container>
     </Section>
   );

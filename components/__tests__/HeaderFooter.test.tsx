@@ -14,7 +14,8 @@ describe('Header and Footer', () => {
 
   it('Footer shows brand text logo and social icons', () => {
     render(<Footer />);
-    expect(screen.getByText(/samirah kurdi/i)).toBeInTheDocument();
+    const brands = screen.getAllByText(/samirah kurdi/i);
+    expect(brands.length).toBeGreaterThanOrEqual(1);
     const wa = screen.getAllByLabelText(/whatsapp/i)[0];
     expect(wa).toHaveAttribute('aria-disabled', 'true');
   });

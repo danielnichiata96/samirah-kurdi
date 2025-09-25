@@ -45,9 +45,6 @@ Recomendado Vercel. Após importar o repositório, configure as variáveis de am
 
 ### Hotmart (Checkout)
 Para ativar o botão Comprar:
-- Pegue o link de checkout do seu produto na Hotmart.
-- Defina `CHECKOUT_EBOOK_URL` no `.env.local` ou use `checkoutUrl` por e-book em `content/ebooks.json`.
-- Opcional: defina a URL de redirecionamento pós-compra em Hotmart para `/ebooks/sucesso`.
 
 UTM passthrough: o componente `CheckoutButton` anexa parâmetros `utm_*` da URL atual ao link de checkout.
 
@@ -57,17 +54,44 @@ Os posts ficam em `content/blog/` e usam arquivos `.mdx` ou `.md` com *frontmatt
 Template:
 
 ```md
----
 title: "Título do post"
 date: "2025-09-14"
 excerpt: "Resumo curto para listagem."
 cover: "/images/capa-exemplo.jpg"
 tags: ["tag1", "tag2"]
 draft: false
----
 
 Conteúdo em Markdown/MDX (pode usar **negrito**, listas, blocos de citação, links, etc.).
 ```
+## Receitas com layout estilizado
+
+- Adicionamos um layout inspirado em páginas de receitas modernas (ex.: "jump to recipe" e cartão lateral com resumo).
+- Para usar, crie arquivos em `content/recipes/*.mdx` com frontmatter estendido:
+
+```
+---
+title: "Bolo de Chocolate Simples"
+date: "2025-09-15"
+excerpt: "Um bolo simples e gostoso, perfeito para iniciantes."
+cover: "/images/placeholder-ebook.png"
+tags: ["bolo", "chocolate", "caseiro"]
+prepTime: "15 minutos"
+cookTime: "35 minutos"
+totalTime: "50 minutos"
+servings: "12 fatias"
+ingredients:
+	- "2 ovos"
+	- "1 xícara de açúcar"
+instructions:
+	- "Misture os ingredientes líquidos."
+	- "Asse em forno a 180°C por 35 minutos."
+---
+
+Aqui vai a introdução e dicas da receita em MDX.
+```
+
+- O cartão lateral de receita (component `RecipeCard`) usa os campos acima automaticamente.
+- Há um botão fixo de "Pular para a receita" (`JumpToRecipe`) que navega ao cartão com id `#receita`.
 
 Fluxo para publicar:
 1. Criar arquivo `slug-do-post.mdx` em `content/blog/` (o nome vira a URL `/blog/slug-do-post`).

@@ -16,7 +16,7 @@ export default function ActiveLink({
   className,
   href,
   exact = false,
-  activeClassName = 'text-zinc-900 font-medium',
+  activeClassName = 'text-rose-500 font-medium',
   ...rest
 }: Props) {
   const pathname = usePathname();
@@ -26,7 +26,7 @@ export default function ActiveLink({
     <Link
       href={href}
       aria-current={isActive ? 'page' : undefined}
-      className={clsx('transition-colors hover:text-zinc-900', className, isActive && activeClassName)}
+      className={clsx('transition-colors hover:text-rose-400', className, isActive && activeClassName)}
       {...rest}
     >
       {children}

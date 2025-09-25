@@ -15,6 +15,17 @@ export type PostFrontmatter = {
   image?: string;
   tags?: string[];
   draft?: boolean;
+  category?: string; // e.g. Breakfast
+  rating?: number; // 0..5
+  reviews?: number; // count
+  // Optional recipe-specific fields
+  prepTime?: string; // e.g. "30 minutos"
+  cookTime?: string; // e.g. "35 minutos"
+  totalTime?: string; // e.g. "1h 05min"
+  servings?: string; // e.g. "12 porções"
+  yield?: string; // alternative to servings
+  ingredients?: string[];
+  instructions?: string[];
 };
 
 export type Post = {
@@ -34,6 +45,17 @@ const FrontmatterSchema = z.object({
   image: z.string().url().or(z.string().startsWith('/')).optional(),
   tags: z.array(z.string().min(1).max(30)).max(8).optional(),
   draft: z.boolean().optional(),
+  category: z.string().max(50).optional(),
+  rating: z.number().min(0).max(5).optional(),
+  reviews: z.number().int().nonnegative().optional(),
+  // Recipe extras (all optional)
+  prepTime: z.string().max(60).optional(),
+  cookTime: z.string().max(60).optional(),
+  totalTime: z.string().max(60).optional(),
+  servings: z.string().max(60).optional(),
+  yield: z.string().max(60).optional(),
+  ingredients: z.array(z.string().min(1)).max(200).optional(),
+  instructions: z.array(z.string().min(1)).max(400).optional(),
 });
 
 function validateFrontmatter(data: any, file: string) {

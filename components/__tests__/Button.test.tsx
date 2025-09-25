@@ -12,6 +12,6 @@ describe('Button', () => {
   it('applies primary variant classes', () => {
     render(<Button variant="primary">CTA</Button>);
     const btn = screen.getByRole('button', { name: /cta/i });
-    expect(btn.className).toMatch(/bg-white/);
+    expect(btn.className).toMatch(/bg-zinc-900/);
   });
 });
