@@ -79,7 +79,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             )}
           </header>
           <Prose>
-            <MDXRemote source={mdx} />
+            <MDXRemote source={mdx} components={{ Image }} />
           </Prose>
         </article>
         <script
