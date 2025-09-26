@@ -96,6 +96,7 @@ export default async function ReceitaPage({ params }: Props) {
               yieldText={post.frontmatter.yield}
               ingredients={post.frontmatter.ingredients}
               instructions={post.frontmatter.instructions}
+
             />
           </aside>
         </div>

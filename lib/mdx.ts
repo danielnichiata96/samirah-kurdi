@@ -13,6 +13,7 @@ export type PostFrontmatter = {
   excerpt?: string;
   cover?: string;
   image?: string;
+  image2?: string;
   tags?: string[];
   draft?: boolean;
   category?: string; // e.g. Breakfast
@@ -43,6 +44,7 @@ const FrontmatterSchema = z.object({
   excerpt: z.string().max(300).optional(),
   cover: z.string().url().or(z.string().startsWith('/')).optional(),
   image: z.string().url().or(z.string().startsWith('/')).optional(),
+  image2: z.string().url().or(z.string().startsWith('/')).optional(),
   tags: z.array(z.string().min(1).max(30)).max(8).optional(),
   draft: z.boolean().optional(),
   category: z.string().max(50).optional(),

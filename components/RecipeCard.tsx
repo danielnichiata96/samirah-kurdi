@@ -1,6 +1,7 @@
 import React from 'react';
 import { FiClock, FiUsers } from 'react-icons/fi';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 type RecipeCardProps = {
   title?: string;
@@ -11,6 +12,8 @@ type RecipeCardProps = {
   yieldText?: string;
   ingredients?: string[];
   instructions?: string[];
+  image?: string;
+  imageAlt?: string;
   className?: string;
 };
 
@@ -23,6 +26,8 @@ export default function RecipeCard({
   yieldText,
   ingredients = [],
   instructions = [],
+  image,
+  imageAlt,
   className,
 }: RecipeCardProps) {
   return (
