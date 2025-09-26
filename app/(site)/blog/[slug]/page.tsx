@@ -8,6 +8,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import type { Metadata } from 'next';
 import { buildMetadata, buildArticleJsonLd, buildBreadcrumbJsonLd } from '@/lib/seo';
 import { getAllPosts } from '@/lib/mdx';
+import MDXImage from '@/components/MDXImage';
 
 // Revalidate blog post pages daily
 export const revalidate = 86400;
@@ -79,7 +80,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             )}
           </header>
           <Prose>
-            <MDXRemote source={mdx} components={{ Image }} />
+            <MDXRemote source={mdx} components={{ Image: MDXImage }} />
           </Prose>
         </article>
         <script

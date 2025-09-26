@@ -5,11 +5,10 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { buildBreadcrumbJsonLd, buildMetadata, buildRecipeJsonLd } from '@/lib/seo';
 import Prose from '@/components/Prose';
-import JumpToRecipe from '@/components/JumpToRecipe';
-import RecipeCard from '@/components/RecipeCard';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Image from 'next/image';
 import RecipeHeader from '@/components/RecipeHeader';
+import MDXImage from '@/components/MDXImage';
 
 type Props = { params: { slug: string } };
 
@@ -80,26 +79,12 @@ export default async function ReceitaPage({ params }: Props) {
           className="mt-2"
         />
 
-        {/* Content + Recipe card */}
-        <div className="mx-auto mt-10 grid max-w-5xl gap-10 lg:grid-cols-[1fr_minmax(320px,420px)]">
+        {/* Content */}
+        <div className="mx-auto mt-10 max-w-4xl">
           <Prose className="min-w-0">
             {/* Server-rendered MDX content */}
-            <MDXRemote source={post.content} components={{ Image }} />
+            <MDXRemote source={post.content} components={{ Image: MDXImage }} />
           </Prose>
-
-          <aside className="lg:sticky lg:top-28 h-fit">
-            <RecipeCard
-              title="Resumo da receita"
-              prepTime={post.frontmatter.prepTime}
-              cookTime={post.frontmatter.cookTime}
-              totalTime={post.frontmatter.totalTime}
-              servings={post.frontmatter.servings}
-              yieldText={post.frontmatter.yield}
-              ingredients={post.frontmatter.ingredients}
-              instructions={post.frontmatter.instructions}
-
-            />
-          </aside>
         </div>
 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(recipeJsonLd) }} />
