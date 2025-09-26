@@ -8,6 +8,7 @@ import Prose from '@/components/Prose';
 import JumpToRecipe from '@/components/JumpToRecipe';
 import RecipeCard from '@/components/RecipeCard';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import Image from 'next/image';
 import RecipeHeader from '@/components/RecipeHeader';
 
 type Props = { params: { slug: string } };
@@ -83,7 +84,7 @@ export default async function ReceitaPage({ params }: Props) {
         <div className="mx-auto mt-10 grid max-w-5xl gap-10 lg:grid-cols-[1fr_minmax(320px,420px)]">
           <Prose className="min-w-0">
             {/* Server-rendered MDX content */}
-            <MDXRemote source={post.content} />
+            <MDXRemote source={post.content} components={{ Image }} />
           </Prose>
 
           <aside className="lg:sticky lg:top-28 h-fit">
