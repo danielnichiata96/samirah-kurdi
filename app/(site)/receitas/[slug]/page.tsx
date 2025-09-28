@@ -77,6 +77,7 @@ export default async function ReceitaPage({ params }: Props) {
           prepTime={post.frontmatter.prepTime}
           cookTime={post.frontmatter.cookTime}
           totalTime={post.frontmatter.totalTime}
+          servings={post.frontmatter.servings}
           className="mt-2"
         />
 

@@ -13,6 +13,7 @@ type Props = {
   prepTime?: string;
   cookTime?: string;
   totalTime?: string;
+  servings?: string;
   className?: string;
 };
 
@@ -27,6 +28,7 @@ export default function RecipeHeader({
   prepTime,
   cookTime,
   totalTime,
+  servings,
   className,
 }: Props) {
   const formattedDate = date
@@ -82,6 +84,36 @@ export default function RecipeHeader({
       <span className="text-sm font-medium tracking-wider text-pink-600 uppercase">SAMIRAH KURDI</span>
     </div>
     {excerpt && <p className="mt-4 text-lg text-zinc-700">{excerpt}</p>}
+
+    {/* Times & servings */}
+    {(prepTime || cookTime || totalTime || typeof servings !== 'undefined') && (
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-zinc-700">
+        {prepTime && (
+          <div className="flex flex-col">
+            <span className="text-xs uppercase text-zinc-500 tracking-wide">Prep.</span>
+            <span className="font-semibold text-zinc-900">{prepTime}</span>
+          </div>
+        )}
+        {cookTime && (
+          <div className="flex flex-col">
+            <span className="text-xs uppercase text-zinc-500 tracking-wide">Cozimento</span>
+            <span className="font-semibold text-zinc-900">{cookTime}</span>
+          </div>
+        )}
+        {totalTime && (
+          <div className="flex flex-col">
+            <span className="text-xs uppercase text-zinc-500 tracking-wide">Total</span>
+            <span className="font-semibold text-zinc-900">{totalTime}</span>
+          </div>
+        )}
+        {servings && (
+          <div className="flex flex-col sm:col-span-1">
+            <span className="text-xs uppercase text-zinc-500 tracking-wide">Rendimento</span>
+            <span className="font-semibold text-zinc-900">{servings}</span>
+          </div>
+        )}
+      </div>
+    )}
 
         {/* Jump button */}
         <div className="mt-6">

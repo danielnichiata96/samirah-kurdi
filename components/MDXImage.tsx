@@ -10,5 +10,8 @@ type MDXImageProps = ComponentProps<typeof Image>;
  * @returns Next.js Image component
  */
 export default function MDXImage(props: MDXImageProps) {
-  return <Image {...props} />;
+  // Ensure an alt attribute is always provided to satisfy a11y linter.
+  // If MDX author didn't provide one, treat it as a decorative image with empty alt.
+  const { alt, ...rest } = props as any;
+  return <Image alt={alt ?? ''} {...rest} />;
 }

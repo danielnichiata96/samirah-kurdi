@@ -73,7 +73,7 @@ export default function SobrePage() {
                 na confeitaria e panificação, unindo técnica de cozinha e didática — com foco em padronização, precificação e qualidade.
               </p>
             </div>
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl shadow ring-1 ring-black/5">
+            <div className="relative aspect-[3/4] md:aspect-[4/3] w-full overflow-hidden rounded-2xl shadow ring-1 ring-black/5">
               <Image src={heroSrc} alt="Retrato de Samirah Kurdi" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
           </div>
