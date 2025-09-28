@@ -55,11 +55,11 @@ export function SocialLink({ network, href, label, className, size = 18, disable
     <a
       href={href}
       aria-label={label || network}
-      className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-300 rounded-full"
+      className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-300 rounded-full z-50 relative"
       target="_blank"
       rel="noopener noreferrer"
     >
-      <span aria-disabled="false" aria-label={label || network}>
+      <span aria-disabled="false" aria-label={label || network} className="relative z-50">
         {inner}
       </span>
     </a>
