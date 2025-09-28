@@ -5,7 +5,12 @@ import React from 'react';
 // Basic mocks for Next.js modules used in tests
 vi.mock('next/image', () => ({
   __esModule: true,
-  default: (props: any) => React.createElement('img', props),
+  default: (props: any) => {
+    const clean = { ...props };
+    // next/image uses a `fill` boolean prop; plain <img> doesn't accept it
+    if ('fill' in clean) delete clean.fill;
+    return React.createElement('img', clean);
+  },
 }));
 
 // Router + navigation mocks

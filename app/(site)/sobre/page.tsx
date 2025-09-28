@@ -25,8 +25,10 @@ export const metadata: Metadata = {
 
 function getHeroImage() {
   const portrait = path.join(process.cwd(), 'public', 'images', 'samirah-portrait.jpg');
+  const aboutHero = path.join(process.cwd(), 'public', 'images', 'about-hero.jpg');
   const heroJpg = path.join(process.cwd(), 'public', 'images', 'hero.jpg');
   if (fs.existsSync(portrait)) return '/images/samirah-portrait.jpg';
+  if (fs.existsSync(aboutHero)) return '/images/about-hero.jpg';
   if (fs.existsSync(heroJpg)) return '/images/hero.jpg';
   return '/images/hero.svg';
 }

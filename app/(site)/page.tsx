@@ -3,6 +3,7 @@ import NewsletterForm from '@/components/NewsletterForm';
 import Section from '@/components/Section';
 import Container from '@/components/Container';
 import Image from 'next/image';
+import ImageCarousel from '@/components/ImageCarousel';
 
 export default function HomePage() {
   return (
@@ -80,6 +81,17 @@ export default function HomePage() {
           </div>
         </Container>
       </Section>
+
+      {/* Image Carousel */}
+      <Section className="py-20">
+        <Container>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-center mb-12">
+            Conheça um pouco do meu trabalho
+          </h2>
+          <ImageCarousel />
+        </Container>
+      </Section>
+
       <Section>
         <Container>
           <h2 className="text-2xl font-semibold mb-4">Receba novidades</h2>

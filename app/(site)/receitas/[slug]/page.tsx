@@ -9,6 +9,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import Image from 'next/image';
 import RecipeHeader from '@/components/RecipeHeader';
 import MDXImage from '@/components/MDXImage';
+import RecipeSummary from '@/components/RecipeSummary';
 
 type Props = { params: { slug: string } };
 
@@ -85,6 +86,21 @@ export default async function ReceitaPage({ params }: Props) {
             {/* Server-rendered MDX content */}
             <MDXRemote source={post.content} components={{ Image: MDXImage }} />
           </Prose>
+          
+          {/* Recipe Summary - Auto-generated from frontmatter */}
+          <div className="mt-12">
+            <RecipeSummary
+              title={post.frontmatter.title}
+              cover={post.frontmatter.cover || post.frontmatter.image}
+              prepTime={post.frontmatter.prepTime}
+              cookTime={post.frontmatter.cookTime}
+              totalTime={post.frontmatter.totalTime}
+              servings={post.frontmatter.servings}
+              category={post.frontmatter.category || post.frontmatter.tags?.[0]}
+              ingredients={post.frontmatter.ingredients}
+              instructions={post.frontmatter.instructions}
+            />
+          </div>
         </div>
 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(recipeJsonLd) }} />

@@ -38,7 +38,7 @@ export default function RecipeHeader({
     <div className={cn('grid items-start gap-8 lg:grid-cols-2', className)}>
       {/* Image */}
       {cover ? (
-        <div className="overflow-hidden rounded-2xl border border-zinc-200">
+        <div className="overflow-hidden rounded-2xl">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={cover} alt="Imagem da receita" className="h-full w-full object-cover" />
         </div>
@@ -77,35 +77,18 @@ export default function RecipeHeader({
         </div>
 
   <h1 className="mt-4 text-pretty font-display text-4xl font-semibold tracking-tight sm:text-5xl">{title}</h1>
-        {excerpt && <p className="mt-4 text-lg text-zinc-700">{excerpt}</p>}
-
-        {/* Times */}
-        <dl className="mt-6 grid grid-cols-3 gap-4 text-sm">
-          {prepTime && (
-            <div>
-              <dt className="text-zinc-500">PREP TIME:</dt>
-              <dd className="font-medium text-zinc-900">{prepTime}</dd>
-            </div>
-          )}
-          {cookTime && (
-            <div>
-              <dt className="text-zinc-500">COOK TIME:</dt>
-              <dd className="font-medium text-zinc-900">{cookTime}</dd>
-            </div>
-          )}
-          {totalTime && (
-            <div>
-              <dt className="text-zinc-500">TOTAL TIME:</dt>
-              <dd className="font-medium text-zinc-900">{totalTime}</dd>
-            </div>
-          )}
-        </dl>
+    <div className="mt-2 flex items-center gap-3">
+      <span className="text-sm font-bold tracking-wider text-zinc-900 uppercase">FEITO POR</span>
+      <span className="text-sm font-medium tracking-wider text-pink-600 uppercase">SAMIRAH KURDI</span>
+    </div>
+    {excerpt && <p className="mt-4 text-lg text-zinc-700">{excerpt}</p>}
 
         {/* Jump button */}
         <div className="mt-6">
           <JumpToRecipe className="sticky top-0 w-full max-w-none px-0" />
         </div>
       </div>
+
     </div>
   );
 }
