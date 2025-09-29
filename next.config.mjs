@@ -8,7 +8,7 @@ const nextConfig = {
   // Disable vendor chunk optimization imports that are causing missing chunk errors in dev
   // (notably for react-icons). This prevents Next from generating and trying to load
   // './vendor-chunks/react-icons.js' on the server runtime.
-  optimizePackageImports: [],
+  optimizePackageImports: ['react-icons'],
   experimental: {
     typedRoutes: true
   },

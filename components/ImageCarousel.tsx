@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
@@ -20,14 +20,27 @@ function mod(n: number, m: number) {
 
 export default function ImageCarousel() {
   const [center, setCenter] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const prev = useCallback(() => setCenter((c) => mod(c - 1, images.length)), []);
-  const next = useCallback(() => setCenter((c) => mod(c + 1, images.length)), []);
+  // Função para trocar slide com bloqueio de transição
+  const changeSlide = useCallback((newCenter: number) => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCenter(newCenter);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => setIsTransitioning(false), 700); // tempo igual à duração da transição
+  }, [isTransitioning]);
+
+  const prev = useCallback(() => changeSlide(mod(center - 1, images.length)), [center, changeSlide]);
+  const next = useCallback(() => changeSlide(mod(center + 1, images.length)), [center, changeSlide]);
 
   useEffect(() => {
-    const id = setInterval(next, 3500);
+    const id = setInterval(() => {
+      if (!isTransitioning) next();
+    }, 3500);
     return () => clearInterval(id);
-  }, [next]);
+  }, [next, isTransitioning]);
 
   // For each slide we compute its position relative to center: -1 (left), 0 (center), 1 (right)
   const getPos = (index: number) => {
@@ -56,11 +69,12 @@ export default function ImageCarousel() {
             return (
               <div
                 key={`${imgIdx}-${slotPos}`}
-                className={`relative flex-shrink-0 h-72 w-[80%] sm:w-[60%] md:w-1/3 max-w-[420px] transition-all duration-400 ease-in-out transform`}
+                className={`relative flex-shrink-0 h-72 w-[80%] sm:w-[60%] md:w-1/3 max-w-[420px] transition-all duration-700 ease-in-out transform`}
                 style={{
                   zIndex: isCenter ? 20 : 10,
                   opacity,
                   transform: `scale(${scale})`,
+                  pointerEvents: isTransitioning ? 'none' : 'auto',
                 }}
               >
                 <Image
@@ -77,15 +91,17 @@ export default function ImageCarousel() {
       </div>
 
       <button
-        onClick={() => setCenter((c) => mod(c - 1, images.length))}
-        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur p-2 rounded-full shadow-md text-zinc-800 hover:bg-white z-50"
+        onClick={prev}
+        disabled={isTransitioning}
+        className={`absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur p-2 rounded-full shadow-md text-zinc-800 hover:bg-white z-50 ${isTransitioning ? 'opacity-50 cursor-not-allowed' : ''}`}
         aria-label="Previous"
       >
         <FaChevronLeft />
       </button>
       <button
-        onClick={() => setCenter((c) => mod(c + 1, images.length))}
-        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur p-2 rounded-full shadow-md text-zinc-800 hover:bg-white z-50"
+        onClick={next}
+        disabled={isTransitioning}
+        className={`absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur p-2 rounded-full shadow-md text-zinc-800 hover:bg-white z-50 ${isTransitioning ? 'opacity-50 cursor-not-allowed' : ''}`}
         aria-label="Next"
       >
         <FaChevronRight />
